@@ -1,0 +1,131 @@
+<mat-card>
+    <h1>Datos del Alumno</h1>
+    <mat-form-field appearance="outline">
+        <mat-label>Nombre</mat-label>
+        <input matInput [formControl]="nombreFormControl" placeholder="Nombre">
+        <mat-error *ngIf="nombreFormControl.hasError('required')">
+            El nombre es <strong>obligatorio</strong>
+        </mat-error>
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+        <mat-label>Apellido</mat-label>
+        <input matInput [formControl]="apellidoFormControl" placeholder="Apellido">
+        <mat-error *ngIf="apellidoFormControl.hasError('required')">
+            El apellido es <strong>obligatorio</strong>
+        </mat-error>
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+        <mat-label>Fecha de Nacimiento</mat-label>
+        <input matInput [matDatepicker]="picker" [formControl]="fechaNaFormControl" >
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+        <mat-error *ngIf="fechaNaFormControl.hasError('required')">
+            La fecha de nacimiento es <strong>obligatoria</strong>
+        </mat-error>
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+        <mat-label>Ingrese su DNI </mat-label>
+        <input matInput [formControl]="dniFormControl" maxlength="8" type="number">
+        <mat-error *ngIf="dniFormControl.hasError('required')">
+            El DNI es <strong>obligatorio</strong>
+        </mat-error>
+        <mat-error *ngIf="dniFormControl.value != null && dniFormControl.value.length < 8">
+            El DNI debe ser <strong>valido</strong>
+        </mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+        <mat-label>Correo electronico</mat-label>
+        <input matInput [formControl]="emailFormControl" placeholder="Ej. admin@gmail.com">
+        <mat-error *ngIf="emailFormControl.hasError('email') && !emailFormControl.hasError('required')">
+            Por favor ingrese un correo valido.
+        </mat-error>
+        <mat-error *ngIf="emailFormControl.hasError('required')">
+            El correo es <strong>obligatorio</strong>
+        </mat-error>
+    </mat-form-field>
+    
+    <mat-form-field appearance="outline">
+        <mat-label>Ingrese su Telefono </mat-label>
+        <input matInput [formControl]="telefonoFormControl" maxlength="10" type="number">
+        <mat-error *ngIf="telefonoFormControl.hasError('required')">
+            El Telefono es <strong>obligatorio</strong>
+        </mat-error>
+        <mat-error *ngIf=" telefonoFormControl.value!=null && telefonoFormControl.value.length < 10">
+            El Telefono debe ser <strong>valido</strong>
+        </mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+        <mat-label>Ingrese Nro de Socio </mat-label>
+        <input matInput [formControl]="nroSocioFormControl" minlength="4" maxlength="4" type="number">
+        <mat-error *ngIf="nroSocioFormControl.hasError('required')">
+            El Nro de Socio es <strong>obligatorio</strong>
+        </mat-error>
+        <mat-error *ngIf="nroSocioFormControl.value!=null && nroSocioFormControl.value.length < 4">
+            El Nro de Socio debe ser <strong>valido</strong>
+        </mat-error>
+        <mat-error *ngIf="nroSocioFormControl.value!=null && nroSocioFormControl.value.length > 4">
+            El Nro de socio no debe ser <strong>mayor a 4 digitos</strong>
+        </mat-error>
+    </mat-form-field>
+
+    <mat-checkbox color='primary' [(ngModel)]="esMenor">Es menor</mat-checkbox>
+    <div *ngIf="esMenor" class="datosResp"> 
+        <hr>
+            <h1>Datos del responsable a cargo</h1>
+            <mat-form-field appearance="outline">
+                <mat-label>Nombre</mat-label>
+                <input matInput [formControl]="nombreRespFormControl" placeholder="Nombre">
+                <mat-error *ngIf="nombreRespFormControl.hasError('required')">
+                    El nombre es <strong>obligatorio</strong>
+                </mat-error>
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+                <mat-label>Apellido</mat-label>
+                <input matInput [formControl]="apellidoRespFormControl" placeholder="Apellido">
+                <mat-error *ngIf="apellidoRespFormControl.hasError('required')">
+                    El apellido es <strong>obligatorio</strong>
+                </mat-error>
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+                <mat-label>Ingrese DNI </mat-label>
+                <input matInput [formControl]="dniRespFormControl" maxlength="8" type="number">
+                <mat-error *ngIf="dniRespFormControl.hasError('required')">
+                    El DNI es <strong>obligatorio</strong>
+                </mat-error>
+                <mat-error *ngIf="dniRespFormControl.value != null && dniRespFormControl.value.length < 8">
+                    El DNI debe ser <strong>valido</strong>
+                </mat-error>
+            </mat-form-field>
+        
+            <mat-form-field appearance="outline">
+                <mat-label>Correo electronico</mat-label>
+                <input matInput [formControl]="emailRespFormControl" placeholder="Ej. admin@gmail.com">
+                <mat-error *ngIf="emailRespFormControl.hasError('email') && !emailFormControl.hasError('required')">
+                    Por favor ingrese un correo valido.
+                </mat-error>
+                <mat-error *ngIf="emailRespFormControl.hasError('required')">
+                    El correo es <strong>obligatorio</strong>
+                </mat-error>
+            </mat-form-field>
+            
+            <mat-form-field appearance="outline">
+                <mat-label>Ingrese Telefono </mat-label>
+                <input matInput [formControl]="telefonoRespFormControl" maxlength="10" type="number">
+                <mat-error *ngIf="telefonoRespFormControl.hasError('required')">
+                    El Telefono es <strong>obligatorio</strong>
+                </mat-error>
+                <mat-error *ngIf="telefonoRespFormControl.value != null && telefonoRespFormControl.value.length < 10">
+                    El Telefono debe ser <strong>valido</strong>
+                </mat-error>
+            </mat-form-field>
+        <hr>
+    </div>
+    
+    <app-upload-image source={{imagen1}} (fotoSeleccionada)="obtieneImagen1($event)" (fotoSubir)="archivoSubir1($event)"></app-upload-image>
+    <div class="botones">
+        <button mat-raised-button color="primary"(click)='registrarAlumno()'>Registrar</button>
+        <button mat-raised-button color="accent"(click)='limpiarCampos()'>Limpiar</button>
+    </div>
+</mat-card>

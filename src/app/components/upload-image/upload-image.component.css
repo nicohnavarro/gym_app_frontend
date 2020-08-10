@@ -1,0 +1,35 @@
+.form-group{
+    padding:1rem;
+    margin:1rem;
+}
+
+.form-group input {
+    width: 0.1px;
+    height: 0.1px;
+    opacity: 0;
+    overflow: hidden;
+    position: absolute;
+    z-index: -1;
+}
+label{
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    color: #673ab7;
+    background-color: #feffff;
+    display: inline-block;
+    transition: all .5s;
+    cursor: pointer;
+    border:0.1rem grey solid;
+    border-radius: 0.14rem;
+    padding: 15px 40px !important;
+    width: fit-content;
+    text-align: center;
+}
+label:hover{
+    background-color: #673ab7;
+    color:white;
+}
+
+
+
