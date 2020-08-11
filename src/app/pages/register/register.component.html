@@ -16,7 +16,7 @@
     </mat-form-field>
     <mat-form-field appearance="outline">
         <mat-label>Fecha de Nacimiento</mat-label>
-        <input matInput [matDatepicker]="picker" [formControl]="fechaNaFormControl" >
+        <input matInput [matDatepicker]="picker" [formControl]="fechaNaFormControl" (dateChange)="necesitaResponsable(fechaNaFormControl.value)">
         <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
         <mat-datepicker #picker></mat-datepicker>
         <mat-error *ngIf="fechaNaFormControl.hasError('required')">
@@ -70,7 +70,7 @@
         </mat-error>
     </mat-form-field>
 
-    <mat-checkbox color='primary' [(ngModel)]="esMenor">Es menor</mat-checkbox>
+    <mat-checkbox color='primary' [(ngModel)]="esMenor" disabled>Es menor</mat-checkbox>
     <div *ngIf="esMenor" class="datosResp"> 
         <hr>
             <h1>Datos del responsable a cargo</h1>

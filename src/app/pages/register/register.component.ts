@@ -196,4 +196,14 @@ export class RegisterComponent implements OnInit {
     }
   }
 
+  necesitaResponsable(value){
+    debugger;
+    if(this.calcularEdad(value)>=18){
+      this.esMenor = false;
+    }
+    else{
+      this.esMenor = true;
+    }
+  }
+
 }
