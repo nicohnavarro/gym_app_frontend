@@ -11,13 +11,31 @@ import { AlumnoService } from 'src/app/services/alumno.service';
 export class AlumnoListadoComponent implements OnInit {
 
   alumnos:Array<Alumno>;
+  displayedColumns: string[] = [
+    'nombre',
+    'apellido',
+    'dni',   
+    'correo',
+    'telefono',
+    'nroSocio',
+    'edad',
+    'nivel',
+    'categoria',
+    'cuota',
+    'editar',
+    'borrar'
+  ];
+  dataSource;
+
   constructor(private alumnoSvc:AlumnoService) { 
     this.alumnos=new Array<Alumno>();
   }
 
   ngOnInit(): void {
     this.alumnoSvc.getAllAlumnos().subscribe(data => {
-      console.log(data);
+     this.alumnos = data;
+     console.log(this.alumnos);
+     this.dataSource= this.alumnos;
     })
   }
 
