@@ -15,6 +15,8 @@ import { AlumnoListadoComponent } from './components/alumno/alumno-listado/alumn
 import { AlumnoDetalleComponent } from './components/alumno/alumno-detalle/alumno-detalle.component';
 import { ListadosComponent } from './pages/listados/listados.component';
 import { HttpClientModule } from '@angular/common/http';
+import { ResponsableListadoComponent } from './components/responsable/responsable-listado/responsable-listado.component';
+import { ResponsableDetalleComponent } from './components/responsable/responsable-detalle/responsable-detalle.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -25,7 +27,9 @@ import { HttpClientModule } from '@angular/common/http';
     RegisterComponent,
     AlumnoListadoComponent,
     AlumnoDetalleComponent,
-    ListadosComponent
+    ListadosComponent,
+    ResponsableListadoComponent,
+    ResponsableDetalleComponent
   ],
   imports: [
     BrowserModule,
