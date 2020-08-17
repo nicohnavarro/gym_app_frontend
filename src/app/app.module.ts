@@ -20,6 +20,7 @@ import { ResponsableDetalleComponent } from './components/responsable/responsabl
 import { EnumAsStringPipe } from './pipes/enum-as-string.pipe';
 import { AlumnoBorradoComponent } from './components/alumno/alumno-borrado/alumno-borrado.component';
 import { EnumToArrayPipe } from './pipes/enum-to-array.pipe';
+import { AlumnoHelper } from './helpers/alumno-helper';
 @NgModule({
   declarations: [
     AppComponent,
@@ -46,7 +47,7 @@ import { EnumToArrayPipe } from './pipes/enum-to-array.pipe';
     ReactiveFormsModule,
     HttpClientModule
   ],
-  providers: [],
+  providers: [AlumnoHelper],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

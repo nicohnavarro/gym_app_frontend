@@ -23,7 +23,6 @@ export class AlumnoBorradoComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data: DialogData2) { }
 
   ngOnInit(): void {
-    console.log(this.data);
     this.alumno=this.data.alumno;
   }
   openSnackBar(message: string, action: string) {

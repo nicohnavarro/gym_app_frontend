@@ -9,6 +9,7 @@ import { Responsable } from 'src/app/models/responsable';
 import { ResponsableService } from 'src/app/services/responsable.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { IResponseEntity } from 'src/app/models/interfaces/responseEntity';
+import { AlumnoHelper } from 'src/app/helpers/alumno-helper';
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
@@ -16,7 +17,7 @@ import { IResponseEntity } from 'src/app/models/interfaces/responseEntity';
 })
 export class RegisterComponent implements OnInit {
 
-  constructor(private alumnoSvc: AlumnoService, private responsableSvc: ResponsableService, private _snackBar: MatSnackBar) { }
+  constructor(private alumnoSvc: AlumnoService, private responsableSvc: ResponsableService, private _snackBar: MatSnackBar, private alumnoHelper:AlumnoHelper) { }
 
   ngOnInit(): void {
   }
@@ -102,7 +103,7 @@ export class RegisterComponent implements OnInit {
 
   registrarAlumno() {
     if (this.validarCampos()) {
-      if (this.calcularEdad(this.fechaNaFormControl.value) < 18)
+      if (this.alumnoHelper.calcularEdad(this.fechaNaFormControl.value) < 18)
         this.esMenor = true;
 
       if (this.esMenor) {
@@ -134,9 +135,10 @@ export class RegisterComponent implements OnInit {
     this.alumno.telefono = this.telefonoFormControl.value;
     this.alumno.fecha_nacimiento = this.fechaNaFormControl.value;
     this.alumno.nro_socio = this.nroSocioFormControl.value;
-    this.alumno.edad = this.calcularEdad(this.fechaNaFormControl.value);
+    this.alumno.edad = this.alumnoHelper.calcularEdad(this.fechaNaFormControl.value);
     this.alumno.certificado_medico = this.imagen1;
-    this.asignarNivel(this.alumno);
+    this.alumnoHelper.asignarNivel(this.alumno);
+    
   }
 
   private cargarResponsable() {
@@ -172,52 +174,7 @@ export class RegisterComponent implements OnInit {
     return retorno;
   }
 
-  private calcularEdad(fecha: Date): number {
-    if (fecha != null) {
-      let diferencia = Math.abs(Date.now() - fecha.getTime());
-      let edad = Math.floor((diferencia / (1000 * 3600 * 24)) / 365);
-      return edad;
-    }
-    return 0;
-  }
 
-  asignarNivel(alumno) {
-    if (alumno.edad >= 13 && alumno.edad <= 18) {
-      alumno.nivel = Niveles.ESCUELITA;
-      alumno.categoria = Categorias.JUVENILES;
-      alumno.dias_practica = "Lunes-Miercoles";
-    }
-    else if (alumno.edad === 11 || alumno.edad === 12) {
-      alumno.nivel = Niveles.ESCUELITA;
-      alumno.categoria = Categorias.INFANTIL;
-      alumno.dias_practica = "Lunes-Miercoles";
-    }
-    else if (alumno.edad === 10 || alumno.edad === 9) {
-      alumno.nivel = Niveles.ESCUELITA;
-      alumno.categoria = Categorias.PREINFANTIL;
-      alumno.dias_practica = "Lunes-Miercoles";
-    }
-    else if (alumno.edad === 8 || alumno.edad === 7) {
-      alumno.nivel = Niveles.ESCUELITA;
-      alumno.categoria = Categorias.MINI;
-      alumno.dias_practica = "Martes-Viernes";
-    }
-    else if (alumno.edad === 6 || alumno.edad === 5) {
-      alumno.nivel = Niveles.ESCUELITA;
-      alumno.categoria = Categorias.PREMINI;
-      alumno.dias_practica = "Miercoles-Viernes";
-    }
-    else if (alumno.edad === 4 || alumno.edad === 3) {
-      alumno.nivel = Niveles.ESCUELITA;
-      alumno.categoria = Categorias.PULGAS;
-      alumno.dias_practica = "Miercoles-Viernes";
-    }
-    else if (alumno.edad > 21) {
-      alumno.nivel = Niveles.ESCUELA;
-      alumno.categoria = Categorias.AVANZADA;
-      alumno.dias_practica = "Lunes-Martes-Viernes";
-    }
-  }
 
   asignarCuota(alumno) {
     switch (alumno.nivel) {
@@ -243,7 +200,7 @@ export class RegisterComponent implements OnInit {
   }
 
   necesitaResponsable(value) {
-    if (value != null && this.calcularEdad(value) >= 18) {
+    if (value != null && this.alumnoHelper.calcularEdad(value) >= 18) {
       this.esMenor = false;
     }
     else {

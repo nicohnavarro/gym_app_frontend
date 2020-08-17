@@ -45,7 +45,6 @@ export class AlumnoListadoComponent implements OnInit {
   getAlumnos(){
     this.alumnoSvc.getAllAlumnos().subscribe(data => {
       this.alumnos = data;
-      console.log(this.alumnos);
       this.dataSource= this.alumnos;
      })
   }
@@ -54,13 +53,11 @@ export class AlumnoListadoComponent implements OnInit {
     const dialogRef = this.dialog.open(component, options);
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
       this.getAlumnos();
     });
   }
 
   editarAlumno(alumno){
-    console.log("editar",alumno);
     this.openDialog(AlumnoDetalleComponent,{
       width: '60%',
       height: 'auto',
@@ -69,7 +66,6 @@ export class AlumnoListadoComponent implements OnInit {
   }
 
   eliminarAlumno(alumno){
-    console.log("eliminar");
     this.openDialog(AlumnoBorradoComponent,{
       width: '25%',
       data: {alumno:alumno}});

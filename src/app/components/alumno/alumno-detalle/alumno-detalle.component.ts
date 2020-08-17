@@ -5,6 +5,7 @@ import { Alumno } from 'src/app/models/alumno';
 import { FormControl, Validators } from '@angular/forms';
 import { Niveles } from 'src/app/common/niveles.enum';
 import { Categorias } from 'src/app/common/categorias.enum';
+import { AlumnoHelper } from 'src/app/helpers/alumno-helper';
 
 export interface DialogData {
   alumnoDetalle;
@@ -20,6 +21,8 @@ export class AlumnoDetalleComponent implements OnInit {
   alumnoDetalle;
   niveles = Niveles;
   categorias = Categorias;
+  diasPractica;
+  panelOpenState = false;
   nombreFormControl = new FormControl('');
   apellidoFormControl = new FormControl('');
   fechaNaFormControl = new FormControl('');
@@ -39,13 +42,13 @@ export class AlumnoDetalleComponent implements OnInit {
 
 
   constructor(public dialogRef: MatDialogRef<AlumnoDetalleComponent>,
+    private alumnoHelper:AlumnoHelper,
     @Inject(MAT_DIALOG_DATA) public data: DialogData) { }
 
   ngOnInit(): void {
-    console.log(this.data);
     this.alumnoDetalle=this.data.alumnoDetalle;
     this.setAlumnoDetalle();
-    console.log(this.categorias);
+    this.diasPractica = this.alumnoDetalle.dias_practica.split("-");
   }
 
   setAlumnoDetalle(){
@@ -61,18 +64,26 @@ export class AlumnoDetalleComponent implements OnInit {
     this.emailFormControl.setValue(this.alumnoDetalle.correo);
     this.categoriaFormControl.setValue(""+this.alumnoDetalle.categoria_id);
     this.nivelFormControl.setValue(""+this.alumnoDetalle.nivel_id);
-    console.log(this.categoriaFormControl.value);
-    console.log(this.alumnoDetalle.categoria_id)
-    
   }
 
   onNoClick(): void {
     this.dialogRef.close();
   }
 
+  setChangeAlumno(){
+    this.alumnoDetalle.correo = this.emailFormControl.value;
+    this.alumnoDetalle.telefono = this.telefonoFormControl.value;
+    this.alumnoDetalle.nivel_id = +this.nivelFormControl.value;
+    this.alumnoDetalle.categoria_id = +this.categoriaFormControl.value;  
+  }
+
+  onOptionsSelected(){
+    this.alumnoHelper.setDiasPractica(this.nivelFormControl.value,this.categoriaFormControl.value,this.alumnoDetalle)
+    this.diasPractica = this.alumnoDetalle.dias_practica.split("-");
+  }
   
   guardarAlumno(){
-
+    this.setChangeAlumno();
   }
 
 }

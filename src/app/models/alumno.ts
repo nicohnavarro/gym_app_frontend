@@ -9,7 +9,7 @@ export class Alumno extends Persona {
     edad:number;
     responsable_id?:number;
     certificado_medico:string;
-    nivel:Niveles;
-    categoria:Categorias;
+    nivel_id:Niveles;
+    categoria_id:Categorias;
     dias_practica:string;
 }

@@ -17,6 +17,7 @@ import { MatNativeDateModule } from '@angular/material/core';
 import {MatTableModule} from '@angular/material/table';
 import { MatDialogModule } from '@angular/material/dialog';
 import {MatListModule} from '@angular/material/list';
+import {MatExpansionModule} from '@angular/material/expansion';
 
 @NgModule({
   declarations: [],
@@ -38,7 +39,8 @@ import {MatListModule} from '@angular/material/list';
     MatNativeDateModule,
     MatTableModule,
     MatDialogModule,
-    MatListModule
+    MatListModule,
+    MatExpansionModule
   ],
   exports:[
     MatToolbarModule,
@@ -57,7 +59,8 @@ import {MatListModule} from '@angular/material/list';
     MatNativeDateModule,
     MatTableModule,
     MatDialogModule,
-    MatListModule
+    MatListModule,
+    MatExpansionModule
   ]
 })
 export class MaterialModule { }
