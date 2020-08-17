@@ -62,12 +62,6 @@ export class RegisterComponent implements OnInit {
     Validators.maxLength(10),
   ]);
 
-  nroSocioFormControl = new FormControl('', [
-    Validators.required,
-    Validators.maxLength(4),
-    Validators.minLength(4),
-  ]);
-
   nombreRespFormControl = new FormControl('', [
     Validators.required,
   ]);
@@ -134,7 +128,7 @@ export class RegisterComponent implements OnInit {
     this.alumno.correo = this.emailFormControl.value;
     this.alumno.telefono = this.telefonoFormControl.value;
     this.alumno.fecha_nacimiento = this.fechaNaFormControl.value;
-    this.alumno.nro_socio = this.nroSocioFormControl.value;
+    this.alumno.nro_socio = Math.floor(Math.random() * (9999 - 1)) + 2;
     this.alumno.edad = this.alumnoHelper.calcularEdad(this.fechaNaFormControl.value);
     this.alumno.certificado_medico = this.imagen1;
     this.alumnoHelper.asignarNivel(this.alumno);
@@ -156,7 +150,6 @@ export class RegisterComponent implements OnInit {
     this.dniFormControl.reset();
     this.emailFormControl.reset();
     this.telefonoFormControl.reset();
-    this.nroSocioFormControl.reset();
     this.esMenor = false;
     this.nombreRespFormControl.reset();
     this.apellidoRespFormControl.reset();

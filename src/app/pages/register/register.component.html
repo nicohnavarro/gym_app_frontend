@@ -56,20 +56,6 @@
         </mat-error>
     </mat-form-field>
 
-    <mat-form-field appearance="outline">
-        <mat-label>Ingrese Nro de Socio </mat-label>
-        <input matInput [formControl]="nroSocioFormControl" minlength="4" maxlength="4" type="number">
-        <mat-error *ngIf="nroSocioFormControl.hasError('required')">
-            El Nro de Socio es <strong>obligatorio</strong>
-        </mat-error>
-        <mat-error *ngIf="nroSocioFormControl.value!=null && nroSocioFormControl.value.length < 4">
-            El Nro de Socio debe ser <strong>valido</strong>
-        </mat-error>
-        <mat-error *ngIf="nroSocioFormControl.value!=null && nroSocioFormControl.value.length > 4">
-            El Nro de socio no debe ser <strong>mayor a 4 digitos</strong>
-        </mat-error>
-    </mat-form-field>
-
     <mat-checkbox color='primary' [(ngModel)]="esMenor" disabled>Es menor</mat-checkbox>
     <div *ngIf="esMenor" class="datosResp"> 
         <hr>

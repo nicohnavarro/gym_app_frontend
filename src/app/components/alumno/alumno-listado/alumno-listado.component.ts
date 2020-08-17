@@ -28,7 +28,6 @@ export class AlumnoListadoComponent implements OnInit {
     'edad',
     'nivel',
     'categoria',
-    'cuota',
     'editar',
     'borrar'
   ];

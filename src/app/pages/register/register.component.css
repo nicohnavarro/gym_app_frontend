@@ -1,6 +1,6 @@
 .mat-card{
     height: auto;
-    min-height: 70vh;
+    /* min-height: 70vh; */
     width: 50vw;
     margin:2rem auto;
     padding:1rem 2rem;
