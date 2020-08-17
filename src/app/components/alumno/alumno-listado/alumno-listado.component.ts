@@ -62,16 +62,16 @@ export class AlumnoListadoComponent implements OnInit {
   editarAlumno(alumno){
     console.log("editar",alumno);
     this.openDialog(AlumnoDetalleComponent,{
-      width: '40%',
-      height: '60%',
+      width: '60%',
+      height: 'auto',
+      maxHeight: '60%',
       data: {alumnoDetalle:alumno}});
   }
 
   eliminarAlumno(alumno){
     console.log("eliminar");
     this.openDialog(AlumnoBorradoComponent,{
-      width: '40%',
-      height: '60%',
+      width: '25%',
       data: {alumno:alumno}});
   }
 

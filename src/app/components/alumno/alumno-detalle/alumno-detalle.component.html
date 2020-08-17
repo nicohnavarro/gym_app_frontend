@@ -1,10 +1,72 @@
-<mat-list>
-    <mat-list-item> {{alumnoDetalle.id}} </mat-list-item>
-    <mat-list-item> {{alumnoDetalle.nombre}} </mat-list-item>
-    <mat-list-item> {{alumnoDetalle.apellido}} </mat-list-item>
-</mat-list>
+<div class="container_edit">
+    <h1>Editar Alumno</h1>
+    <mat-card>
+        <mat-form-field appearance="outline">
+            <mat-label>Nombre</mat-label>
+            <input matInput [formControl]="nombreFormControl">
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+            <mat-label>Apellido</mat-label>
+            <input matInput [formControl]="apellidoFormControl">
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+            <mat-label>Fecha de Nacimiento</mat-label>
+            <input matInput [matDatepicker]="picker" [formControl]="fechaNaFormControl">
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+            <mat-label>Su DNI </mat-label>
+            <input matInput [formControl]="dniFormControl" type="number">
+        </mat-form-field>
 
-<div class="botones">
-    <button mat-raised-button color="primary"(click)='guardarAlumno()'>Guardar</button>
-    <button mat-raised-button color="accent"(click)='onNoClick()'>Cerrar</button>
+        <mat-form-field appearance="outline">
+            <mat-label>Correo electronico</mat-label>
+            <input matInput [formControl]="emailFormControl" placeholder="Ej. admin@gmail.com">
+            <mat-error *ngIf="emailFormControl.hasError('email') && !emailFormControl.hasError('required')">
+                Por favor ingrese un correo valido.
+            </mat-error>
+            <mat-error *ngIf="emailFormControl.hasError('required')">
+                El correo es <strong>obligatorio</strong>
+            </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+            <mat-label>Ingrese su Telefono </mat-label>
+            <input matInput [formControl]="telefonoFormControl" maxlength="10" type="number">
+            <mat-error *ngIf="telefonoFormControl.hasError('required')">
+                El Telefono es <strong>obligatorio</strong>
+            </mat-error>
+            <mat-error *ngIf=" telefonoFormControl.value!=null && telefonoFormControl.value.length < 10">
+                El Telefono debe ser <strong>valido</strong>
+            </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+            <mat-label>Categoria</mat-label>
+            <mat-select [formControl]="categoriaFormControl" required>
+                <mat-option *ngFor="let item of categorias | enumToArray" value="{{item.index}}">
+                    {{item.name}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+            <mat-label>Nivel</mat-label>
+            <mat-select [formControl]="nivelFormControl" required>
+                <mat-option *ngFor="let item of niveles | enumToArray" value="{{item.index}}">
+                    {{item.name}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+    </mat-card>
+    <!-- <mat-list>
+        <mat-list-item> {{alumnoDetalle.id}} </mat-list-item>
+        <mat-list-item> {{alumnoDetalle.nombre}} </mat-list-item>
+        <mat-list-item> {{alumnoDetalle.apellido}} </mat-list-item>
+    </mat-list> -->
+
+    <div class="botones">
+        <button mat-raised-button color="primary" (click)='guardarAlumno()'>Guardar</button>
+        <button mat-raised-button color="accent" (click)='onNoClick()'>Cerrar</button>
+    </div>
 </div>
