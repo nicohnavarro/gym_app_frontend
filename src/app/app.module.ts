@@ -17,6 +17,8 @@ import { ListadosComponent } from './pages/listados/listados.component';
 import { HttpClientModule } from '@angular/common/http';
 import { ResponsableListadoComponent } from './components/responsable/responsable-listado/responsable-listado.component';
 import { ResponsableDetalleComponent } from './components/responsable/responsable-detalle/responsable-detalle.component';
+import { EnumAsStringPipe } from './pipes/enum-as-string.pipe';
+import { AlumnoBorradoComponent } from './components/alumno/alumno-borrado/alumno-borrado.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -29,7 +31,9 @@ import { ResponsableDetalleComponent } from './components/responsable/responsabl
     AlumnoDetalleComponent,
     ListadosComponent,
     ResponsableListadoComponent,
-    ResponsableDetalleComponent
+    ResponsableDetalleComponent,
+    EnumAsStringPipe,
+    AlumnoBorradoComponent
   ],
   imports: [
     BrowserModule,

@@ -23,5 +23,9 @@ export class AlumnoService {
     return this.http.post(environment.API_URL+'/addAlumno',alumno);
   }
 
+  public deleteAlumno(id:number){
+    return this.http.delete(environment.API_URL+'/deleteAlumno/'+id);
+  }
+
   
 }

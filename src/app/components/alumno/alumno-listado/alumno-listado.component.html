@@ -31,7 +31,7 @@
       <!-- NroSocio Column -->
     <ng-container matColumnDef="nroSocio">
         <th mat-header-cell *matHeaderCellDef> Nro Socio </th>
-        <td mat-cell *matCellDef="let element"> {{element.nroSocio}} </td>
+        <td mat-cell *matCellDef="let element"> {{element.nro_socio}} </td>
       </ng-container>
     
       <!-- Edad Column -->
@@ -43,13 +43,13 @@
       <!-- Nivel Column -->
       <ng-container matColumnDef="nivel">
         <th mat-header-cell *matHeaderCellDef> Nivel </th>
-        <td mat-cell *matCellDef="let element"> {{element.nivel}} </td>
+        <td mat-cell *matCellDef="let element"> {{element.nivel_id | enumAsString:Niveles}} </td>
       </ng-container>
     
       <!-- Categoria Column -->
       <ng-container matColumnDef="categoria">
         <th mat-header-cell *matHeaderCellDef> Categoria </th>
-        <td mat-cell *matCellDef="let element"> {{element.categoria}} </td>
+        <td mat-cell *matCellDef="let element"> {{element.categoria_id | enumAsString:Categorias}} </td>
       </ng-container>
   
       <!-- Cuota Column -->
@@ -60,12 +60,12 @@
         
       <ng-container matColumnDef="editar">
         <th mat-header-cell *matHeaderCellDef> Editar </th>
-        <td mat-cell *matCellDef="let element"><mat-icon aria-hidden="false" aria-label="Example home icon">edit</mat-icon></td>
+        <td mat-cell *matCellDef="let element"><mat-icon aria-hidden="false" aria-label="Example home icon" (click)="editarAlumno(element)">edit</mat-icon></td>
       </ng-container>
 
       <ng-container matColumnDef="borrar">
         <th mat-header-cell *matHeaderCellDef> Borrar </th>
-        <td mat-cell *matCellDef="let element"><mat-icon aria-hidden="false" aria-label="Example home icon">delete</mat-icon></td>
+        <td mat-cell *matCellDef="let element"><mat-icon aria-hidden="false" aria-label="Example home icon" (click)="eliminarAlumno(element)">delete</mat-icon></td>
       </ng-container>
   
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
