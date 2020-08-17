@@ -4,14 +4,12 @@ import { Niveles } from '../common/niveles.enum';
 import { Categorias } from '../common/categorias.enum';
 
 export class Alumno extends Persona {
-    fechaNacimiento:Date;
-    nroSocio:number;
-    esMenor:boolean;
+    fecha_nacimiento:Date;
+    nro_socio:number;
     edad:number;
-    responsable:Responsable;
-    certificadoMedico:string;
+    responsable_id?:number;
+    certificado_medico:string;
     nivel:Niveles;
     categoria:Categorias;
-    cuota:number
-    diasPractica:string;
+    dias_practica:string;
 }

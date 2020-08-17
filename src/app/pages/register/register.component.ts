@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { Niveles } from 'src/app/common/niveles.enum';
 import { Categorias } from 'src/app/common/categorias.enum';
 import { Alumno } from 'src/app/models/alumno';
+import { AlumnoService } from 'src/app/services/alumno.service';
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
@@ -11,11 +12,11 @@ import { Alumno } from 'src/app/models/alumno';
 })
 export class RegisterComponent implements OnInit {
 
-  constructor() { }
+  constructor(private alumnoSvc:AlumnoService) { }
 
   ngOnInit(): void {
   }
-
+  alumno:Alumno = new Alumno();
   imagen1='../../../assets/recetamedica.png';
   imagen1Subir:any;
   esMenor:boolean = false;
@@ -106,11 +107,22 @@ export class RegisterComponent implements OnInit {
       certificadoMedico:this.imagen1,
       nivel:"",
       categoria:"",
-      diasPractica:"",
+      dias_practica:"",
       cuota:"",
     }
     console.log(alumnoJson);
-    let alumno = new Alumno();
+    this.alumno.nombre = this.nombreFormControl.value;
+    this.alumno.apellido = this.apellidoFormControl.value;
+    this.alumno.dni = this.dniFormControl.value;
+    this.alumno.correo = this.emailFormControl.value;
+    this.alumno.telefono = this.telefonoFormControl.value;
+    this.alumno.fecha_nacimiento = this.fechaNaFormControl.value;
+    this.alumno.nro_socio = this.nroSocioFormControl.value;
+    this.alumno.edad = this.calcularEdad(this.fechaNaFormControl.value);
+    this.alumno.responsable_id = 0;
+    this.alumno.certificado_medico = this.imagen1;
+    this.asignarNivel(this.alumno);
+    this.alumnoSvc.addAlumno(this.alumno);
   }
 
   limpiarCampos(){
@@ -139,37 +151,37 @@ export class RegisterComponent implements OnInit {
     if(alumno.edad>=13 && alumno.edad<=18){
       alumno.nivel = Niveles.ESCUELITA;
       alumno.categoria = Categorias.JUVENILES;
-      alumno.diasPractica = "Lunes-Miercoles";
+      alumno.dias_practica = "Lunes-Miercoles";
     }
     else if(alumno.edad ===11 || alumno.edad ===12){
       alumno.nivel = Niveles.ESCUELITA;
       alumno.categoria = Categorias.INFANTIL;
-      alumno.diasPractica = "Lunes-Miercoles";
+      alumno.dias_practica = "Lunes-Miercoles";
     }
     else if(alumno.edad ===10 || alumno.edad ===9){
       alumno.nivel = Niveles.ESCUELITA;
       alumno.categoria = Categorias.PREINFANTIL;
-      alumno.diasPractica = "Lunes-Miercoles";
+      alumno.dias_practica = "Lunes-Miercoles";
     }
     else if(alumno.edad ===8 || alumno.edad ===7){
       alumno.nivel = Niveles.ESCUELITA;
       alumno.categoria = Categorias.MINI;
-      alumno.diasPractica = "Martes-Viernes";
+      alumno.dias_practica = "Martes-Viernes";
     }
     else if(alumno.edad ===6 || alumno.edad ===5){
       alumno.nivel = Niveles.ESCUELITA;
       alumno.categoria = Categorias.PREMINI;
-      alumno.diasPractica = "Miercoles-Viernes";
+      alumno.dias_practica = "Miercoles-Viernes";
     }
     else if(alumno.edad ===4 || alumno.edad ===3){
       alumno.nivel = Niveles.ESCUELITA;
       alumno.categoria = Categorias.PULGAS;
-      alumno.diasPractica = "Miercoles-Viernes";
+      alumno.dias_practica = "Miercoles-Viernes";
     }
     else if(alumno.edad > 21){
       alumno.nivel = Niveles.ESCUELA;
       alumno.categoria = Categorias.AVANZADA;
-      alumno.diasPractica = "Lunes-Martes-Viernes";
+      alumno.dias_practica = "Lunes-Martes-Viernes";
     }
   }
 
@@ -204,6 +216,10 @@ export class RegisterComponent implements OnInit {
     else{
       this.esMenor = true;
     }
+  }
+
+  private setAlumnoDTO(nombre,apellido,dni,correo,telefono,fecha_nacimiento,nro_socio,edad,reponsable_id,certificado_medico,nivel,categoria,dias_practica){
+
   }
 
 }
