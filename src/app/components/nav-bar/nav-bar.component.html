@@ -3,7 +3,12 @@
    <span class="example-spacer"></span>
    <button mat-button color="accent" [routerLink]="['/pagos']" routerLinkActive="active" >Pagos</button>
    <button mat-button color="accent" [routerLink]="['/reportes']" routerLinkActive="active" >Reportes</button>
-   <button mat-button color="accent" [routerLink]="['/listado']" routerLinkActive="active" >Listados</button>
+   <button mat-button color="accent" routerLinkActive="active" [matMenuTriggerFor]="menu">Listados</button>
+   <mat-menu #menu="matMenu">
+  <button mat-menu-item color="accent" [routerLink]="['/listado/alumnos']">Alumnos</button>
+  <button mat-menu-item color="accent"[routerLink]="['/listado/responsables']">Responsables</button>
+  <button mat-menu-item color="accent" [routerLink]="['/listado/usuarios']">Usuarios</button>
+</mat-menu>
    <button mat-button color="accent" [routerLink]="['/register']" routerLinkActive="active">Registrar Alumno</button>
    <button mat-button color="accent" [routerLink]="['/login']" routerLinkActive="active">Login</button>
  </mat-toolbar>

@@ -16,8 +16,7 @@ export class ResponsableListadoComponent implements OnInit {
     'dni',   
     'correo',
     'telefono',
-    'editar',
-    'borrar'
+    'editar'
   ];
   dataSource;
 
@@ -26,7 +25,10 @@ export class ResponsableListadoComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    
+    this.responsableSvc.getAllResponsables().subscribe(data => {
+      this.responsables = data;
+      this.dataSource= this.responsables;
+     })
   }
 
 

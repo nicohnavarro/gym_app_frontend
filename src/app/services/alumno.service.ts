@@ -1,10 +1,9 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 
-import { Observable, throwError } from 'rxjs';
-import { catchError, retry } from 'rxjs/operators';
+import { Observable } from 'rxjs';
 import { Alumno } from '../models/alumno';
-import { IAlumno } from '../models/interfaces/Alumno';
+import { environment } from 'src/environments/environment';
 @Injectable({
   providedIn: 'root'
 })
@@ -13,19 +12,15 @@ export class AlumnoService {
   constructor(private http: HttpClient) { }
 
   public getAllAlumnos():Observable<any>{
-    return this.http.get<any>('http://localhost:8080/getAllAlumnos');
+    return this.http.get<any>(environment.API_URL+'/getAllAlumnos');
   }
 
   public getAlumnoById(id:number){
-    return this.http.get<any>(`/alumno/${id}`)
+    return this.http.get<any>(`/alumno/${id}`);
   }
 
   public addAlumno(alumno:Alumno){
-    console.log(alumno);
-    this.http.post('http://localhost:8080/addAlumno',alumno)
-    .subscribe(data =>{
-      console.log(data);
-    },err =>{console.log(err);})
+    return this.http.post(environment.API_URL+'/addAlumno',alumno);
   }
 
   

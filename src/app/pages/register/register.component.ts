@@ -5,6 +5,10 @@ import { Niveles } from 'src/app/common/niveles.enum';
 import { Categorias } from 'src/app/common/categorias.enum';
 import { Alumno } from 'src/app/models/alumno';
 import { AlumnoService } from 'src/app/services/alumno.service';
+import { Responsable } from 'src/app/models/responsable';
+import { ResponsableService } from 'src/app/services/responsable.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { IResponseEntity } from 'src/app/models/interfaces/responseEntity';
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
@@ -12,15 +16,24 @@ import { AlumnoService } from 'src/app/services/alumno.service';
 })
 export class RegisterComponent implements OnInit {
 
-  constructor(private alumnoSvc:AlumnoService) { }
+  constructor(private alumnoSvc: AlumnoService, private responsableSvc: ResponsableService, private _snackBar: MatSnackBar) { }
 
   ngOnInit(): void {
   }
-  alumno:Alumno = new Alumno();
-  imagen1='../../../assets/recetamedica.png';
-  imagen1Subir:any;
-  esMenor:boolean = false;
 
+  alumno: Alumno = new Alumno();
+  responsable: Responsable = new Responsable();
+  imagen1 = '../../../assets/recetamedica.png';
+  imagen1Subir: any;
+  esMenor: boolean = false;
+
+  openSnackBar(message: string, action: string) {
+    this._snackBar.open(message, action, {
+      duration: 2000,
+    });
+  }
+
+  //#region FormControls
   nombreFormControl = new FormControl('', [
     Validators.required,
   ]);
@@ -76,41 +89,44 @@ export class RegisterComponent implements OnInit {
     Validators.required,
     Validators.maxLength(10),
   ]);
+  //#endregion
 
-  obtieneImagen1(e){
-    this.imagen1=e.result;
+  //#region Img
+  obtieneImagen1(e) {
+    this.imagen1 = e.result;
   }
-  archivoSubir1(e){
-    this.imagen1Subir=e;
+  archivoSubir1(e) {
+    this.imagen1Subir = e;
+  }
+  //#endregion
+
+  registrarAlumno() {
+    if (this.validarCampos()) {
+      if (this.calcularEdad(this.fechaNaFormControl.value) < 18)
+        this.esMenor = true;
+
+      if (this.esMenor) {
+        this.cargarResponsable();
+        this.responsableSvc.addResponsable(this.responsable).subscribe(data => {
+          let response = data as IResponseEntity;
+          this.openSnackBar(response.message, 'X');
+          this.alumno.responsable_id = response.entity.id;
+        }, err => { this.openSnackBar(err, 'X'); });
+      }
+
+      this.cargarAlumno();
+      this.alumnoSvc.addAlumno(this.alumno).subscribe(data => {
+        let response = data as IResponseEntity;
+        this.openSnackBar(response.message, 'X');
+        this.alumno.responsable_id = response.entity.id;
+      }, err => {
+        this.openSnackBar(err, 'X');
+        //TODO delete responsable 
+      });
+    }
   }
 
-  registrarAlumno(){
-    console.log(this.calcularEdad(this.fechaNaFormControl.value));
-    if(this.calcularEdad(this.fechaNaFormControl.value)<18){
-      this.esMenor=true;
-    }
-    let alumnoJson= {
-      nombre:this.nombreFormControl.value,
-      apellido:this.apellidoFormControl.value,
-      fechaNacimiento:this.fechaNaFormControl.value,
-      dni:this.dniFormControl.value,
-      correo:this.emailFormControl.value,
-      telefono:this.telefonoFormControl.value,
-      nroSocio:this.nroSocioFormControl.value,
-      esMenor:this.esMenor,
-      edad:this.calcularEdad(this.fechaNaFormControl.value),
-      tutorNombre:this.nombreRespFormControl.value,
-      tutorApellido:this.apellidoRespFormControl.value,
-      tutorDni:this.dniRespFormControl.value,
-      tutorCorreo:this.emailFormControl.value,
-      tutorTelefono:this.telefonoRespFormControl.value,
-      certificadoMedico:this.imagen1,
-      nivel:"",
-      categoria:"",
-      dias_practica:"",
-      cuota:"",
-    }
-    console.log(alumnoJson);
+  private cargarAlumno() {
     this.alumno.nombre = this.nombreFormControl.value;
     this.alumno.apellido = this.apellidoFormControl.value;
     this.alumno.dni = this.dniFormControl.value;
@@ -119,13 +135,19 @@ export class RegisterComponent implements OnInit {
     this.alumno.fecha_nacimiento = this.fechaNaFormControl.value;
     this.alumno.nro_socio = this.nroSocioFormControl.value;
     this.alumno.edad = this.calcularEdad(this.fechaNaFormControl.value);
-    this.alumno.responsable_id = 0;
     this.alumno.certificado_medico = this.imagen1;
     this.asignarNivel(this.alumno);
-    this.alumnoSvc.addAlumno(this.alumno);
   }
 
-  limpiarCampos(){
+  private cargarResponsable() {
+    this.responsable.nombre = this.nombreRespFormControl.value;
+    this.responsable.apellido = this.apellidoRespFormControl.value;
+    this.responsable.dni = this.dniRespFormControl.value;
+    this.responsable.correo = this.emailRespFormControl.value;
+    this.responsable.telefono = this.telefonoRespFormControl.value;
+  }
+
+  limpiarCampos() {
     this.nombreFormControl.reset();
     this.apellidoFormControl.reset();
     this.fechaNaFormControl.reset();
@@ -133,7 +155,7 @@ export class RegisterComponent implements OnInit {
     this.emailFormControl.reset();
     this.telefonoFormControl.reset();
     this.nroSocioFormControl.reset();
-    this.esMenor=false;
+    this.esMenor = false;
     this.nombreRespFormControl.reset();
     this.apellidoRespFormControl.reset();
     this.dniRespFormControl.reset();
@@ -141,85 +163,93 @@ export class RegisterComponent implements OnInit {
     this.telefonoRespFormControl.reset();
   }
 
-  private  calcularEdad(fecha:Date):number{
-    let diferencia = Math.abs(Date.now() - fecha.getTime());
-    let edad = Math.floor((diferencia / (1000 * 3600 * 24))/365);
-    return edad;
+  private validarCampos() {
+    let retorno: boolean = true;
+    if (this.nombreFormControl.untouched && this.fechaNaFormControl.untouched) {
+      this.openSnackBar("Debe completar todos los campos!", "X");
+      retorno = false;
+    }
+    return retorno;
   }
 
-  asignarNivel(alumno){
-    if(alumno.edad>=13 && alumno.edad<=18){
+  private calcularEdad(fecha: Date): number {
+    if (fecha != null) {
+      let diferencia = Math.abs(Date.now() - fecha.getTime());
+      let edad = Math.floor((diferencia / (1000 * 3600 * 24)) / 365);
+      return edad;
+    }
+    return 0;
+  }
+
+  asignarNivel(alumno) {
+    if (alumno.edad >= 13 && alumno.edad <= 18) {
       alumno.nivel = Niveles.ESCUELITA;
       alumno.categoria = Categorias.JUVENILES;
       alumno.dias_practica = "Lunes-Miercoles";
     }
-    else if(alumno.edad ===11 || alumno.edad ===12){
+    else if (alumno.edad === 11 || alumno.edad === 12) {
       alumno.nivel = Niveles.ESCUELITA;
       alumno.categoria = Categorias.INFANTIL;
       alumno.dias_practica = "Lunes-Miercoles";
     }
-    else if(alumno.edad ===10 || alumno.edad ===9){
+    else if (alumno.edad === 10 || alumno.edad === 9) {
       alumno.nivel = Niveles.ESCUELITA;
       alumno.categoria = Categorias.PREINFANTIL;
       alumno.dias_practica = "Lunes-Miercoles";
     }
-    else if(alumno.edad ===8 || alumno.edad ===7){
+    else if (alumno.edad === 8 || alumno.edad === 7) {
       alumno.nivel = Niveles.ESCUELITA;
       alumno.categoria = Categorias.MINI;
       alumno.dias_practica = "Martes-Viernes";
     }
-    else if(alumno.edad ===6 || alumno.edad ===5){
+    else if (alumno.edad === 6 || alumno.edad === 5) {
       alumno.nivel = Niveles.ESCUELITA;
       alumno.categoria = Categorias.PREMINI;
       alumno.dias_practica = "Miercoles-Viernes";
     }
-    else if(alumno.edad ===4 || alumno.edad ===3){
+    else if (alumno.edad === 4 || alumno.edad === 3) {
       alumno.nivel = Niveles.ESCUELITA;
       alumno.categoria = Categorias.PULGAS;
       alumno.dias_practica = "Miercoles-Viernes";
     }
-    else if(alumno.edad > 21){
+    else if (alumno.edad > 21) {
       alumno.nivel = Niveles.ESCUELA;
       alumno.categoria = Categorias.AVANZADA;
       alumno.dias_practica = "Lunes-Martes-Viernes";
     }
   }
 
-  asignarCuota(alumno){
+  asignarCuota(alumno) {
     switch (alumno.nivel) {
       case Niveles.ESCUELITA:
-        alumno.cuota=1000;
-      break;
+        alumno.cuota = 1000;
+        break;
 
       case Niveles.ESCUELA:
-        alumno.cuota=1500;
-      break;
-      
+        alumno.cuota = 1500;
+        break;
+
       case Niveles.PREEQUIPO:
-        alumno.cuota=2000;
-      break;
-      
+        alumno.cuota = 2000;
+        break;
+
       case Niveles.EQUIPO:
-        alumno.cuota=2500;
-      break;
+        alumno.cuota = 2500;
+        break;
 
       default:
         break;
     }
   }
 
-  necesitaResponsable(value){
-    debugger;
-    if(this.calcularEdad(value)>=18){
+  necesitaResponsable(value) {
+    if (value != null && this.calcularEdad(value) >= 18) {
       this.esMenor = false;
     }
-    else{
+    else {
       this.esMenor = true;
     }
   }
 
-  private setAlumnoDTO(nombre,apellido,dni,correo,telefono,fecha_nacimiento,nro_socio,edad,reponsable_id,certificado_medico,nivel,categoria,dias_practica){
-
-  }
 
 }

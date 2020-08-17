@@ -8,7 +8,5 @@ table {
   }
 .mat-row:hover{
     background-color: #673ab7;
-    color: white!important;
-    font-weight: bold;
     cursor: pointer;
 }
