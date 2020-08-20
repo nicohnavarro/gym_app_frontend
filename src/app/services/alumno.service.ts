@@ -12,24 +12,22 @@ export class AlumnoService {
   constructor(private http: HttpClient) { }
 
   public getAllAlumnos():Observable<any>{
-    return this.http.get<any>(environment.API_URL+'/getAllAlumnos');
+    return this.http.get<any>(environment.API_URL+'alumno/getAll');
   }
 
   public getAlumnoById(id:number){
-    return this.http.get<any>(`/alumno/${id}`);
+    return this.http.get<any>(`alumno/${id}`);
   }
 
   public addAlumno(alumno:Alumno){
-    return this.http.post(environment.API_URL+'/addAlumno',alumno);
+    return this.http.post(environment.API_URL+'alumno/add',alumno);
   }
 
   public deleteAlumno(id:number){
-    return this.http.delete(environment.API_URL+'/deleteAlumno/'+id);
+    return this.http.delete(environment.API_URL+'alumno/delete/'+id);
   }
 
   public modifyAlumno(alumno:Alumno){
-    return this.http.put(environment.API_URL+'/modifyAlumno',alumno);
+    return this.http.put(environment.API_URL+'alumno/modify',alumno);
   }
-
-  
 }

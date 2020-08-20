@@ -1,4 +1,5 @@
-<table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+<mat-spinner *ngIf="cargando" color="accent" [diameter]=150 style="margin: 10% auto;"></mat-spinner>
+<table mat-table [dataSource]="dataSource" class="mat-elevation-z8" *ngIf="!cargando">
     <!-- Nombre Column -->
     <ng-container matColumnDef="nombre">
         <th mat-header-cell *matHeaderCellDef> Nombre </th>

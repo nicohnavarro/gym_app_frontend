@@ -12,14 +12,18 @@ export class ResponsableService {
   constructor(private http:HttpClient) { }
 
   public getAllResponsables():Observable<any>{
-    return this.http.get<any>(environment.API_URL+'/getAllResponsables');
+    return this.http.get<any>(environment.API_URL+'responsable/getAll');
   }
 
   public getResponsableById(id:number){
-    return this.http.get<any>(environment.API_URL+`/responsable/${id}`)
+    return this.http.get<any>(environment.API_URL+`responsable/${id}`)
   }
 
   public addResponsable(responsable:Responsable){
     return this.http.post(environment.API_URL+'/addResponsable',responsable)
+  }
+
+  public deleteResponsable(id:number){
+    return this.http.delete(environment.API_URL+'responsable/delete/'+id);
   }
 }

@@ -10,6 +10,7 @@ import { ResponsableService } from 'src/app/services/responsable.service';
 export class ResponsableListadoComponent implements OnInit {
 
   responsables:Array<Responsable>;
+  cargando:boolean=true;
   displayedColumns: string[] = [
     'nombre',
     'apellido',
@@ -28,6 +29,10 @@ export class ResponsableListadoComponent implements OnInit {
     this.responsableSvc.getAllResponsables().subscribe(data => {
       this.responsables = data;
       this.dataSource= this.responsables;
+      setTimeout(() => {
+        
+        this.cargando=false;
+      }, 2000);
      })
   }
 

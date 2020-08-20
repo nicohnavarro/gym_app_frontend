@@ -16,6 +16,7 @@ import { AlumnoBorradoComponent } from '../alumno-borrado/alumno-borrado.compone
 export class AlumnoListadoComponent implements OnInit {
 
   alumnos:Array<Alumno>;
+  cargando:boolean=true;
   Niveles = Niveles;
   Categorias = Categorias;
   displayedColumns: string[] = [
@@ -45,6 +46,10 @@ export class AlumnoListadoComponent implements OnInit {
     this.alumnoSvc.getAllAlumnos().subscribe(data => {
       this.alumnos = data;
       this.dataSource= this.alumnos;
+      setTimeout(() => {
+        
+        this.cargando=false;
+      }, 2000);
      })
   }
 
