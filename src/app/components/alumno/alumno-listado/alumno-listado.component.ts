@@ -37,7 +37,6 @@ export class AlumnoListadoComponent implements OnInit {
     'borrar'
   ];
   dataSource = new MatTableDataSource<Alumno>(this.alumnos);
-
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
   
   constructor(private alumnoSvc:AlumnoService,public dialog: MatDialog) { 
