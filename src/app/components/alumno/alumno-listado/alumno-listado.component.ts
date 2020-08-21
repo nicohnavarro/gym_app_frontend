@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Alumno } from 'src/app/models/alumno';
 import { AlumnoService } from 'src/app/services/alumno.service';
 import {Categorias} from 'src/app/common/categorias.enum'
@@ -7,6 +7,10 @@ import { Inject} from '@angular/core';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
 import { AlumnoDetalleComponent } from '../alumno-detalle/alumno-detalle.component';
 import { AlumnoBorradoComponent } from '../alumno-borrado/alumno-borrado.component';
+import {PageEvent} from '@angular/material/paginator';
+import {MatPaginator} from '@angular/material/paginator';
+import { MatTableDataSource } from '@angular/material/table';
+
 @Component({
   selector: 'app-alumno-listado',
   templateUrl: './alumno-listado.component.html',
@@ -32,20 +36,23 @@ export class AlumnoListadoComponent implements OnInit {
     'editar',
     'borrar'
   ];
-  dataSource;
+  dataSource = new MatTableDataSource<Alumno>(this.alumnos);
 
+  @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
+  
   constructor(private alumnoSvc:AlumnoService,public dialog: MatDialog) { 
     this.alumnos=new Array<Alumno>();
   }
 
   ngOnInit(): void {
     this.getAlumnos();
+    this.dataSource.paginator = this.paginator;
   }
 
   getAlumnos(){
     this.alumnoSvc.getAllAlumnos().subscribe(data => {
       this.alumnos = data;
-      this.dataSource= this.alumnos;
+      this.dataSource.data = this.alumnos;
       setTimeout(() => {
         
         this.cargando=false;

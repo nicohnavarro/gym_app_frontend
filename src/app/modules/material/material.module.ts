@@ -18,6 +18,7 @@ import {MatTableModule} from '@angular/material/table';
 import { MatDialogModule } from '@angular/material/dialog';
 import {MatListModule} from '@angular/material/list';
 import {MatExpansionModule} from '@angular/material/expansion';
+import {MatPaginatorModule} from '@angular/material/paginator';
 
 @NgModule({
   declarations: [],
@@ -40,7 +41,8 @@ import {MatExpansionModule} from '@angular/material/expansion';
     MatTableModule,
     MatDialogModule,
     MatListModule,
-    MatExpansionModule
+    MatExpansionModule,
+    MatPaginatorModule
   ],
   exports:[
     MatToolbarModule,
@@ -60,7 +62,8 @@ import {MatExpansionModule} from '@angular/material/expansion';
     MatTableModule,
     MatDialogModule,
     MatListModule,
-    MatExpansionModule
+    MatExpansionModule,
+    MatPaginatorModule
   ]
 })
 export class MaterialModule { }
