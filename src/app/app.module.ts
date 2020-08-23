@@ -21,6 +21,8 @@ import { EnumAsStringPipe } from './pipes/enum-as-string.pipe';
 import { AlumnoBorradoComponent } from './components/alumno/alumno-borrado/alumno-borrado.component';
 import { EnumToArrayPipe } from './pipes/enum-to-array.pipe';
 import { AlumnoHelper } from './helpers/alumno-helper';
+import { UsuarioLoginComponent } from './components/usuario/usuario-login/usuario-login.component';
+import { UsuarioDetalleComponent } from './components/usuario/usuario-detalle/usuario-detalle.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -36,7 +38,9 @@ import { AlumnoHelper } from './helpers/alumno-helper';
     ResponsableDetalleComponent,
     EnumAsStringPipe,
     AlumnoBorradoComponent,
-    EnumToArrayPipe
+    EnumToArrayPipe,
+    UsuarioLoginComponent,
+    UsuarioDetalleComponent
   ],
   imports: [
     BrowserModule,
