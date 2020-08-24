@@ -24,6 +24,7 @@ import { AlumnoHelper } from './helpers/alumno-helper';
 import { UsuarioLoginComponent } from './components/usuario/usuario-login/usuario-login.component';
 import { UsuarioDetalleComponent } from './components/usuario/usuario-detalle/usuario-detalle.component';
 import { PagosComponent } from './pages/pagos/pagos.component';
+import { ReportesComponent } from './pages/reportes/reportes.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -42,7 +43,8 @@ import { PagosComponent } from './pages/pagos/pagos.component';
     EnumToArrayPipe,
     UsuarioLoginComponent,
     UsuarioDetalleComponent,
-    PagosComponent
+    PagosComponent,
+    ReportesComponent
   ],
   imports: [
     BrowserModule,
