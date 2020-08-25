@@ -26,6 +26,9 @@ import { UsuarioDetalleComponent } from './components/usuario/usuario-detalle/us
 import { PagosComponent } from './pages/pagos/pagos.component';
 import { ReportesComponent } from './pages/reportes/reportes.component';
 import { LoginComponent } from './pages/login/login.component';
+import { ControlAlumnosComponent } from './pages/control-alumnos/control-alumnos.component';
+import { PorNivelCatComponent } from './components/control/por-nivel-cat/por-nivel-cat.component';
+import { PorDiaComponent } from './components/control/por-dia/por-dia.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -46,7 +49,10 @@ import { LoginComponent } from './pages/login/login.component';
     UsuarioDetalleComponent,
     PagosComponent,
     ReportesComponent,
-    LoginComponent
+    LoginComponent,
+    ControlAlumnosComponent,
+    PorNivelCatComponent,
+    PorDiaComponent
   ],
   imports: [
     BrowserModule,

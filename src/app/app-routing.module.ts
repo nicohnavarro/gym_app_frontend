@@ -9,14 +9,17 @@ import { ResponsableListadoComponent } from './components/responsable/responsabl
 import { PagosComponent } from './pages/pagos/pagos.component';
 import { ReportesComponent } from './pages/reportes/reportes.component';
 import { LoginComponent } from './pages/login/login.component';
+import { AuthGuard } from './guards/auth.guard';
+import { ControlAlumnosComponent } from './pages/control-alumnos/control-alumnos.component';
 
 
 const routes: Routes = [
-  { path: '', component: HomeComponent, data: {animation: 'Home'}},
+  { path: '', component: HomeComponent, data: {animation: 'Home'},},
   { path: 'home', component: HomeComponent, data: {animation: 'Home'}},
   { path: 'login', component: LoginComponent, data: {animation: 'Login'}},
   { path: 'register', component: RegisterComponent, data: {animation: 'Registro'}},
-  { path: 'listado', component: ListadosComponent,
+  { path: 'control-alumnos', component: ControlAlumnosComponent, data: {animation: 'Home'}},
+  { path: 'listado', component: ListadosComponent,canActivate:[AuthGuard],
   children: [
     {
     path:  'alumnos',

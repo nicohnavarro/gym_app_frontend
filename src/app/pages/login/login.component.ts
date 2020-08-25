@@ -33,7 +33,6 @@ export class LoginComponent implements OnInit {
     this.activarSpinner();
       // const user = await this.authSvc.login(this.emailFormControl.value, this.passwordFormControl.value);
       const user = {username:this.emailFormControl.value,password:this.passwordFormControl.value}
-      console.log(this.cargando);
       if (user) {
         localStorage.setItem('usuario', JSON.stringify(user));
         this.router.navigate(['/home']);
@@ -41,10 +40,10 @@ export class LoginComponent implements OnInit {
       else {
         this.openSnackBar('No ingresaste una cuenta valida.', 'Registrase');
       }
-      console.log(user);
     }
     catch (err) {
-      console.log(err);
+        this.openSnackBar('Ha ocurrido un error.', 'Ups!');
+
     }
 
   }
