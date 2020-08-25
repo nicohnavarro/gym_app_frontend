@@ -25,6 +25,7 @@ import { UsuarioLoginComponent } from './components/usuario/usuario-login/usuari
 import { UsuarioDetalleComponent } from './components/usuario/usuario-detalle/usuario-detalle.component';
 import { PagosComponent } from './pages/pagos/pagos.component';
 import { ReportesComponent } from './pages/reportes/reportes.component';
+import { LoginComponent } from './pages/login/login.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -44,7 +45,8 @@ import { ReportesComponent } from './pages/reportes/reportes.component';
     UsuarioLoginComponent,
     UsuarioDetalleComponent,
     PagosComponent,
-    ReportesComponent
+    ReportesComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,

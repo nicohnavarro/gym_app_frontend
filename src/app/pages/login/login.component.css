@@ -1,0 +1,77 @@
+.row {
+    display: flex;
+    width: 100vw;
+    height: 100vh;
+}
+
+.column {
+    flex: 50%;
+}
+
+.imagen {
+    background: url('../../../assets/inicio.jpg');
+    background-position: center;
+    /* Center the image */
+    background-repeat: no-repeat;
+    /* Do not repeat the image */
+    background-size: cover;
+    /* Resize the background image to cover the entire container */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: .5s;
+}
+
+mat-toolbar span {
+    flex: 1;
+    text-align: center;
+    align-items: center;
+}
+
+.example-form {
+    /* min-width: 150px;
+    max-width: 500px; */
+    width: 80%;
+    margin: auto;
+}
+
+mat-form-field {
+    padding: 0.4rem;
+    width: 100%;
+    margin-top: 1rem;
+}
+
+.btn-ingreso {
+    margin-top: 10%;
+    text-align: center;
+    height: 10%;
+}
+
+.btn-login {
+    margin-top: 10%;
+    text-align: center;
+    height: 20%;
+}
+
+.mediano {
+    height: 70%;
+    width: 25%;
+    margin: 0.3rem;
+    align-items: center;
+    justify-content: space-around;
+}
+
+button img {
+    height: 60%;
+    width: 25%;
+}
+
+.grande {
+    height: 40%;
+    width: 40%;
+    margin: 0.3rem;
+}
+
+mat-spinner {
+    margin: auto;
+}

@@ -1,0 +1,45 @@
+<div class="row">
+    <div class="column imagen"></div>
+    <div class="column login">
+
+        <mat-toolbar color="primary">
+            <span>Gym Online Ingreso</span>
+        </mat-toolbar>
+
+        <div class="campos">
+            <form class="example-form">
+                <mat-form-field appearance="fill">
+                    <mat-label>Correo electronico</mat-label>
+                    <input matInput [formControl]="emailFormControl" placeholder="Ej. admin@gmail.com">
+                    <!-- <mat-error *ngIf="emailFormControl.hasError('email') && !emailFormControl.hasError('required')">
+                        Por favor ingrese un correo valido.
+                    </mat-error>
+                    <mat-error *ngIf="emailFormControl.hasError('required')">
+                        El correo es <strong>obligatorio</strong>
+                    </mat-error> -->
+                </mat-form-field>
+
+                <mat-form-field appearance="fill">
+                    <mat-label>Ingrese su contraseña </mat-label>
+                    <input matInput [formControl]="passwordFormControl" minlength="6" [type]="hide ? 'password' : 'text'">
+                    <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                    <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                    </button>
+                    <!-- <mat-error *ngIf="passwordFormControl.hasError('required')">
+                        La contraseña es <strong>obligatoria</strong>
+                    </mat-error>
+                    <mat-error *ngIf="passwordFormControl.value.length < 6">
+                        La contraseña debe contener al menos <strong>6 caracteres</strong>
+                    </mat-error> -->
+                </mat-form-field>
+            </form>
+
+        </div>
+        <div class="btn-login" *ngIf="(!cargando)">
+            <button class="grande" *ngIf="(!cargando)" mat-raised-button color="primary" (click)="logIn()">Ingresar</button>
+            <button class="grande" *ngIf="(cargando)" mat-raised-button color="primary">Cargando ...</button>
+            <button class="grande" mat-raised-button color="accent" routerLink="/register">Registrarse</button>
+        </div>
+        <mat-spinner *ngIf="(cargando)"></mat-spinner>
+    </div>
+</div>
