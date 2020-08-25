@@ -1,26 +1,60 @@
+<mat-form-field appearance="outline">
+    <mat-label>Nivel</mat-label>
+    <mat-select [formControl]="nivelFormControl" required (selectionChange)="onOptionsSelected()">
+        <mat-option *ngFor="let item of niveles | enumToArray" value="{{item.index}}">
+            {{item.name}}
+        </mat-option>
+    </mat-select>
+</mat-form-field>
+<mat-form-field appearance="outline"
+    *ngIf="nivelFormControl.value != 2 && nivelFormControl.value !=3 && nivelFormControl.value!=1">
+    <mat-label>Categoria</mat-label>
+    <mat-select [formControl]="categoriaFormControl" required (selectionChange)="onOptionsSelected()">
+        <mat-option *ngFor="let item of categorias | enumToArray" value="{{item.index}}">
+            {{item.name}}
+        </mat-option>
+    </mat-select>
+</mat-form-field>
+<mat-form-field appearance="outline" *ngIf="nivelFormControl.value == 1">
+    <mat-label>Categoria</mat-label>
+    <mat-select [formControl]="categoriaFormControl" required (selectionChange)="onOptionsSelected()" disabled>
+        <mat-option value="6">AVANZADA
+        </mat-option>
+    </mat-select>
+</mat-form-field>
 
-        <mat-form-field appearance="outline">
-            <mat-label>Nivel</mat-label>
-            <mat-select [formControl]="nivelFormControl" required (selectionChange)="onOptionsSelected()">
-                <mat-option *ngFor="let item of niveles | enumToArray" value="{{item.index}}">
-                    {{item.name}}
-                </mat-option>
-            </mat-select>
-        </mat-form-field>
-        <mat-form-field appearance="outline" *ngIf="nivelFormControl.value != 2 && nivelFormControl.value !=3 && nivelFormControl.value!=1">
-            <mat-label>Categoria</mat-label>
-            <mat-select [formControl]="categoriaFormControl" required (selectionChange)="onOptionsSelected()">
-                <mat-option *ngFor="let item of categorias | enumToArray" value="{{item.index}}">
-                    {{item.name}}
-                </mat-option>
-            </mat-select>
-        </mat-form-field>
-        <mat-form-field appearance="outline" *ngIf="nivelFormControl.value == 1">
-            <mat-label>Categoria</mat-label>
-            <mat-select [formControl]="categoriaFormControl" required (selectionChange)="onOptionsSelected()" disabled>
-                <mat-option value="6">AVANZADA
-                </mat-option>
-            </mat-select>
-        </mat-form-field>
+<button mat-raised-button color="accent" (click)='buscarAlumnos()'>Buscar</button>
 
-        <button mat-raised-button color="accent"(click)='buscarAlumnos()'>Buscar</button>
+
+<mat-spinner *ngIf="cargando" [diameter]=150 style="margin: 10% auto;"></mat-spinner>
+<table mat-table [dataSource]="dataSource" class="mat-elevation-z8" *ngIf="alumnos != null">
+
+    <!-- Dni Column -->
+    <ng-container matColumnDef="dni">
+        <th mat-header-cell *matHeaderCellDef> DNI </th>
+        <td mat-cell *matCellDef="let element"> {{element.dni}} </td>
+    </ng-container>
+
+    <!-- Apellido Column -->
+    <ng-container matColumnDef="apellido">
+        <th mat-header-cell *matHeaderCellDef> Apellido </th>
+        <td mat-cell *matCellDef="let element"> {{element.apellido}} </td>
+    </ng-container>
+
+    <!-- NroSocio Column -->
+    <ng-container matColumnDef="nroSocio">
+        <th mat-header-cell *matHeaderCellDef> Nro Socio </th>
+        <td mat-cell *matCellDef="let element"> #{{element.nro_socio}} </td>
+    </ng-container>
+
+
+    <ng-container matColumnDef="presente">
+        <th mat-header-cell *matHeaderCellDef> Asistencia </th>
+        <td mat-cell *matCellDef="let element">
+            <mat-checkbox class="asistencia" (change)="onChange(element)"></mat-checkbox>
+        </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>

@@ -30,4 +30,8 @@ export class AlumnoService {
   public modifyAlumno(alumno:Alumno){
     return this.http.put(environment.API_URL+'alumno/modify',alumno);
   }
+
+  public getControlAlumnos(nivel:number,cat:number){
+    return this.http.get<any>(`${environment.API_URL}alumno/control/${nivel}/${cat}`);
+  }
 }
