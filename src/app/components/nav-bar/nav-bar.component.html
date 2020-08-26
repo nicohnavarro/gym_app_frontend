@@ -1,5 +1,5 @@
 <mat-toolbar color='primary'>
-   <span [routerLink]="['/home']" >GymOnline</span>
+   <span [routerLink]="['/home']">GymOnline</span>
    <span class="example-spacer"></span>
    <button mat-button color="accent" [routerLink]="['/pagos']" routerLinkActive="active" *ngIf="isLoggeado">Pagos</button>
    <button mat-button color="accent" [routerLink]="['/control-alumnos']" routerLinkActive="active" *ngIf="isLoggeado">Control de Alumnos</button>
@@ -8,8 +8,13 @@
    <mat-menu #menu="matMenu">
   <button mat-menu-item color="accent" [routerLink]="['/listado/alumnos']">Alumnos</button>
   <button mat-menu-item color="accent"[routerLink]="['/listado/responsables']">Responsables</button>
-  <button mat-menu-item color="accent" [routerLink]="['/listado/usuarios']">Usuarios</button>
+  <button mat-menu-item color="accent" [routerLink]="['/listado/usuarios']" disabled>Usuarios</button>
 </mat-menu>
    <button mat-button color="accent" [routerLink]="['/register']" routerLinkActive="active">Registrar Alumno</button>
    <button mat-button color="accent" [routerLink]="['/login']" routerLinkActive="active"*ngIf="!isLoggeado">Login</button>
+   <button mat-button color="accent" [matMenuTriggerFor]="perfil" routerLinkActive="active"*ngIf="isLoggeado">Perfil</button>
+   <mat-menu #perfil="matMenu">
+    <button mat-menu-item color="accent" (click)="logOut()">LogOut</button>
+    <button mat-menu-item color="accent" [routerLink]="['/home']">Ver Perfil</button>
+  </mat-menu>
  </mat-toolbar>

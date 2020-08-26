@@ -13,7 +13,6 @@ export class UsuarioService {
   isLoggeado:boolean=false;
 
   public loginUsuario(usuario:IUsuario){
-    debugger;
     return this.http.post(environment.API_URL+'usuario/login',usuario);
   }
 }

@@ -1,4 +1,4 @@
 export interface IUsuario {
-    usuario:string;
+    correo:string;
     clave:string;
 }

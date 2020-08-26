@@ -22,6 +22,7 @@ export class LoginComponent implements OnInit {
     Validators.minLength(6),
   ]);
 
+  usuario: IUsuario;
   hide = true;
   cargando = false;
 
@@ -32,28 +33,28 @@ export class LoginComponent implements OnInit {
 
   logIn() {
     try {
-      debugger;
       this.activarSpinner();
-      let usuario: IUsuario;
-      usuario.usuario = this.emailFormControl.value;
-      usuario.clave = this.passwordFormControl.value;
-      debugger;
-      console.log(usuario);
-      this.usuarioSvc.loginUsuario(usuario).subscribe(data => {
-        console.log(data);
+      if (this.emailFormControl.value == "" || this.passwordFormControl.value == "")
+        throw new Error("Debe ingresar correo y clave!");
+      console.log(this.emailFormControl.value);
+      this.usuario = {
+        correo: this.emailFormControl.value,
+        clave: this.passwordFormControl.value
+      }
+      this.usuarioSvc.loginUsuario(this.usuario).subscribe(data => {
         let response = data as IResponseEntity;
         this.usuarioSvc.isLoggeado = true;
         this.openSnackBar(response.message, 'X');
         this.router.navigate(['/home']);
       }, err => { this.openSnackBar(err, 'X'); });
     }
-    catch (err) { this.openSnackBar('Ha ocurrido un error.', 'Ups!'); }
+    catch (err) { this.openSnackBar(err.message, 'Ups!'); }
 
   }
 
   openSnackBar(message: string, action: string) {
     let snackBarRef = this._snackBar.open(message, action, {
-      duration: 4000,
+      duration: 3000,
     });
     snackBarRef.afterDismissed().subscribe(() => {
       //console.log('The snack-bar was dismissed');

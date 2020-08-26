@@ -18,7 +18,7 @@ const routes: Routes = [
   { path: 'home', component: HomeComponent, data: {animation: 'Home'}},
   { path: 'login', component: LoginComponent, data: {animation: 'Login'}},
   { path: 'register', component: RegisterComponent, data: {animation: 'Registro'}},
-  { path: 'control-alumnos', component: ControlAlumnosComponent, data: {animation: 'Home'}},
+  { path: 'control-alumnos', component: ControlAlumnosComponent,canActivate:[AuthGuard], data: {animation: 'Home'}},
   { path: 'listado', component: ListadosComponent,canActivate:[AuthGuard],
   children: [
     {
@@ -33,8 +33,8 @@ const routes: Routes = [
     path:  'usuarios',
     component:  ErrorComponent
     }]},
-  { path: 'pagos', component: PagosComponent},
-  { path: 'reportes', component: ReportesComponent},
+  { path: 'pagos', component: PagosComponent,canActivate:[AuthGuard]},
+  { path: 'reportes', component: ReportesComponent,canActivate:[AuthGuard]},
   { path: '**', component: ErrorComponent }
 ];
 
