@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { UsuarioService } from 'src/app/services/usuario.service';
+import { IUsuario } from 'src/app/models/interfaces/IUsuario';
+import { IResponseEntity } from 'src/app/models/interfaces/responseEntity';
 
 @Component({
   selector: 'app-login',
@@ -22,29 +25,29 @@ export class LoginComponent implements OnInit {
   hide = true;
   cargando = false;
 
-  constructor( private router: Router, private _snackBar: MatSnackBar) { }
+  constructor(private router: Router, private _snackBar: MatSnackBar, private usuarioSvc: UsuarioService) { }
 
   ngOnInit(): void {
   }
 
-  async logIn() {
-  try {
-
-    this.activarSpinner();
-      // const user = await this.authSvc.login(this.emailFormControl.value, this.passwordFormControl.value);
-      const user = {username:this.emailFormControl.value,password:this.passwordFormControl.value}
-      if (user) {
-        localStorage.setItem('usuario', JSON.stringify(user));
+  logIn() {
+    try {
+      debugger;
+      this.activarSpinner();
+      let usuario: IUsuario;
+      usuario.usuario = this.emailFormControl.value;
+      usuario.clave = this.passwordFormControl.value;
+      debugger;
+      console.log(usuario);
+      this.usuarioSvc.loginUsuario(usuario).subscribe(data => {
+        console.log(data);
+        let response = data as IResponseEntity;
+        this.usuarioSvc.isLoggeado = true;
+        this.openSnackBar(response.message, 'X');
         this.router.navigate(['/home']);
-      }
-      else {
-        this.openSnackBar('No ingresaste una cuenta valida.', 'Registrase');
-      }
+      }, err => { this.openSnackBar(err, 'X'); });
     }
-    catch (err) {
-        this.openSnackBar('Ha ocurrido un error.', 'Ups!');
-
-    }
+    catch (err) { this.openSnackBar('Ha ocurrido un error.', 'Ups!'); }
 
   }
 
@@ -55,16 +58,16 @@ export class LoginComponent implements OnInit {
     snackBarRef.afterDismissed().subscribe(() => {
       //console.log('The snack-bar was dismissed');
     });
-  
+
     snackBarRef.onAction().subscribe(() => {
       //console.log('The snack-bar action was triggered!');
       this.router.navigate(['/register']);
     });
   }
 
-  activarSpinner(){
-    this.cargando=true;
-    setTimeout(()=>this.cargando=false,3000);
+  activarSpinner() {
+    this.cargando = true;
+    setTimeout(() => this.cargando = false, 3000);
   }
 
 }
