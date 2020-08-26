@@ -1,0 +1,13 @@
+.mat-raised-button{
+    margin:auto;
+}
+
+.container_info{
+    display: flex;
+}
+
+.botones{
+    margin-bottom: 0;
+    display: flex;
+    align-content: space-between;
+}
