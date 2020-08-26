@@ -167,31 +167,6 @@ export class RegisterComponent implements OnInit {
     return retorno;
   }
 
-
-
-  asignarCuota(alumno) {
-    switch (alumno.nivel) {
-      case Niveles.ESCUELITA:
-        alumno.cuota = 1000;
-        break;
-
-      case Niveles.ESCUELA:
-        alumno.cuota = 1500;
-        break;
-
-      case Niveles.PREEQUIPO:
-        alumno.cuota = 2000;
-        break;
-
-      case Niveles.EQUIPO:
-        alumno.cuota = 2500;
-        break;
-
-      default:
-        break;
-    }
-  }
-
   necesitaResponsable(value) {
     if (value != null && this.alumnoHelper.calcularEdad(value) >= 18) {
       this.esMenor = false;
@@ -200,6 +175,5 @@ export class RegisterComponent implements OnInit {
       this.esMenor = true;
     }
   }
-
 
 }

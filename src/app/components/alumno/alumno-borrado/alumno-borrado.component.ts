@@ -5,7 +5,7 @@ import { AlumnoService } from 'src/app/services/alumno.service';
 import { IResponseEntity } from 'src/app/models/interfaces/responseEntity';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
-export interface DialogData2 {
+export interface BorradoAlumno {
   alumno;
 }
 
@@ -20,7 +20,7 @@ export class AlumnoBorradoComponent implements OnInit {
   constructor(public dialogRef: MatDialogRef<AlumnoBorradoComponent>,
     private AlumnoSvc:AlumnoService,
     private _snackBar: MatSnackBar,
-    @Inject(MAT_DIALOG_DATA) public data: DialogData2) { }
+    @Inject(MAT_DIALOG_DATA) public data: BorradoAlumno) { }
 
   ngOnInit(): void {
     this.alumno=this.data.alumno;

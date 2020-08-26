@@ -29,6 +29,9 @@ import { LoginComponent } from './pages/login/login.component';
 import { ControlAlumnosComponent } from './pages/control-alumnos/control-alumnos.component';
 import { PorNivelCatComponent } from './components/control/por-nivel-cat/por-nivel-cat.component';
 import { PorDiaComponent } from './components/control/por-dia/por-dia.component';
+import { PagoRegistroComponent } from './components/pagos/pago-registro/pago-registro.component';
+import { PagoDetalleComponent } from './components/pagos/pago-detalle/pago-detalle.component';
+import { PagoListadoComponent } from './components/pagos/pago-listado/pago-listado.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -52,7 +55,10 @@ import { PorDiaComponent } from './components/control/por-dia/por-dia.component'
     LoginComponent,
     ControlAlumnosComponent,
     PorNivelCatComponent,
-    PorDiaComponent
+    PorDiaComponent,
+    PagoRegistroComponent,
+    PagoDetalleComponent,
+    PagoListadoComponent
   ],
   imports: [
     BrowserModule,

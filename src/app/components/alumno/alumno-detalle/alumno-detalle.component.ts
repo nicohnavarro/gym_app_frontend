@@ -10,7 +10,7 @@ import { AlumnoService } from 'src/app/services/alumno.service';
 import { IResponseEntity } from 'src/app/models/interfaces/responseEntity';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
-export interface DialogData {
+export interface AlumnoDetalle {
   alumnoDetalle;
 }
 
@@ -48,7 +48,7 @@ export class AlumnoDetalleComponent implements OnInit {
     private alumnoHelper: AlumnoHelper,
     private alumnoSvc: AlumnoService,
     private _snackBar: MatSnackBar,
-    @Inject(MAT_DIALOG_DATA) public data: DialogData) { }
+    @Inject(MAT_DIALOG_DATA) public data: AlumnoDetalle) { }
 
   ngOnInit(): void {
     this.alumnoDetalle = this.data.alumnoDetalle;

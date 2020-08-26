@@ -33,7 +33,7 @@ export class AlumnoHelper {
       alumno.nivel_id = Niveles.ESCUELA;
       alumno.categoria_id = Categorias.AVANZADA;
     }
-    this.setDiasPractica(alumno.nivel_id,alumno.categoria_id,alumno);
+    this.setDiasPractica(alumno.nivel_id, alumno.categoria_id, alumno);
   }
 
   public calcularEdad(fecha: Date): number {
@@ -45,7 +45,7 @@ export class AlumnoHelper {
     return 0;
   }
 
-  public setDiasPractica(nivel_id,categoria_id,alumno) {
+  public setDiasPractica(nivel_id, categoria_id, alumno) {
     if (nivel_id == Niveles.ESCUELITA) {
       switch (+categoria_id) {
         case Categorias.PULGAS:
@@ -70,13 +70,33 @@ export class AlumnoHelper {
           break;
       }
     }
-    else if(nivel_id == Niveles.ESCUELA){
+    else if (nivel_id == Niveles.ESCUELA) {
       categoria_id = Categorias.AVANZADA;
       alumno.dias_practica = "LUNES-MARTES-VIERNES";
     }
-    else if(nivel_id == Niveles.PREEQUIPO)
+    else if (nivel_id == Niveles.PREEQUIPO)
       alumno.dias_practica = "LUNES-MIERCOLES-VIERNES";
     else if (nivel_id == Niveles.EQUIPO)
       alumno.dias_practica = "LUNES-MARTES-MIERCOLES-VIERNES";
+  }
+
+
+  public setCuota(alumno: Alumno): number {
+    switch (alumno.nivel_id) {
+      case 0:
+        return 1000;
+        break;
+      case 1:
+        return 1500;
+        break;
+      case 2:
+        return 2000;
+        break;
+      case 3:
+        return 2500;
+        break;
+      default:
+        break;
+    }
   }
 }

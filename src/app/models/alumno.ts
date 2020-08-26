@@ -4,6 +4,7 @@ import { Niveles } from '../common/niveles.enum';
 import { Categorias } from '../common/categorias.enum';
 
 export class Alumno extends Persona {
+    id:number;
     fecha_nacimiento:Date;
     nro_socio:number;
     edad:number;

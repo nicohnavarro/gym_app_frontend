@@ -10,6 +10,8 @@ import { AlumnoBorradoComponent } from '../alumno-borrado/alumno-borrado.compone
 import {PageEvent} from '@angular/material/paginator';
 import {MatPaginator} from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
+import { AlumnoHelper } from 'src/app/helpers/alumno-helper';
+import { PagoRegistroComponent } from '../../pagos/pago-registro/pago-registro.component';
 
 @Component({
   selector: 'app-alumno-listado',
@@ -33,13 +35,14 @@ export class AlumnoListadoComponent implements OnInit {
     'edad',
     'nivel',
     'categoria',
+    'pago',
     'editar',
     'borrar'
   ];
   dataSource = new MatTableDataSource<Alumno>(this.alumnos);
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
   
-  constructor(private alumnoSvc:AlumnoService,public dialog: MatDialog) { 
+  constructor(private alumnoSvc:AlumnoService,public dialog: MatDialog,private alumnoHlp:AlumnoHelper) { 
     this.alumnos=new Array<Alumno>();
   }
 
@@ -80,5 +83,13 @@ export class AlumnoListadoComponent implements OnInit {
       width: '25%',
       data: {alumno:alumno}});
   }
+  realizarPago(alumno){
+    let pago:number=this.alumnoHlp.setCuota(alumno);
+    this.openDialog(PagoRegistroComponent,{
+      width: '25%',
+      data: {alumno,pago}});
+  }
+
+
 
 }
