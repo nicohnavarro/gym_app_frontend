@@ -49,22 +49,22 @@ export class AlumnoHelper {
     if (nivel_id == Niveles.ESCUELITA) {
       switch (+categoria_id) {
         case Categorias.PULGAS:
-          alumno.dias_practica = "Miercoles-Viernes";
+          alumno.dias_practica = "MIERCOLES-VIERNES";
           break;
         case Categorias.PREMINI:
-          alumno.dias_practica = "Miercoles-Viernes";
+          alumno.dias_practica = "MIERCOLES-VIERNES";
           break;
         case Categorias.MINI:
-          alumno.dias_practica = "Martes-Viernes";
+          alumno.dias_practica = "MARTES-VIERNES";
           break;
         case Categorias.PREINFANTIL:
-          alumno.dias_practica = "Lunes-Miercoles";
+          alumno.dias_practica = "LUNES-MIERCOLES";
           break;
         case Categorias.INFANTIL:
-          alumno.dias_practica = "Lunes-Miercoles";
+          alumno.dias_practica = "LUNES-MIERCOLES";
           break;
         case Categorias.JUVENILES:
-          alumno.dias_practica = "Lunes-Miercoles";
+          alumno.dias_practica = "LUNES-MIERCOLES";
           break;
         default:
           break;
@@ -72,11 +72,11 @@ export class AlumnoHelper {
     }
     else if(nivel_id == Niveles.ESCUELA){
       categoria_id = Categorias.AVANZADA;
-      alumno.dias_practica = "Lunes-Martes-Viernes";
+      alumno.dias_practica = "LUNES-MARTES-VIERNES";
     }
     else if(nivel_id == Niveles.PREEQUIPO)
-      alumno.dias_practica = "Lunes-Miercoles-Viernes";
+      alumno.dias_practica = "LUNES-MIERCOLES-VIERNES";
     else if (nivel_id == Niveles.EQUIPO)
-      alumno.dias_practica = "Lunes-Martes-Miercoles-Viernes";
+      alumno.dias_practica = "LUNES-MARTES-MIERCOLES-VIERNES";
   }
 }

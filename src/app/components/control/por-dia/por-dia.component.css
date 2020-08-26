@@ -1,0 +1,17 @@
+.mat-form-field{
+    margin-top: 1rem;
+    margin:2rem;
+}
+
+table {
+    width: 100%;
+    padding: 1rem;
+  }
+
+tbody tr:hover{
+    background-color: #ffd740;
+  }
+
+.mat-row:hover{
+    background-color: #ffd740;
+}

@@ -1,1 +1,54 @@
-<p>por-dia works!</p>
+<mat-form-field appearance="outline">
+    <mat-label>Dia</mat-label>
+    <mat-select [formControl]="diaFormControl" required (selectionChange)="onOptionsSelected()">
+        <mat-option *ngFor="let item of dias | enumToArray" value="{{item.index}}">
+            {{item.name}}
+        </mat-option>
+    </mat-select>
+</mat-form-field>
+
+<button mat-raised-button color="primary" (click)='buscarAlumnos()'>Buscar</button>
+
+
+<mat-spinner *ngIf="cargando" [diameter]=150 style="margin: 10% auto;"></mat-spinner>
+<table mat-table [dataSource]="dataSource" class="mat-elevation-z8" *ngIf="filtrados">
+
+    <!-- Dni Column -->
+    <ng-container matColumnDef="dni">
+        <th mat-header-cell *matHeaderCellDef> DNI </th>
+        <td mat-cell *matCellDef="let element"> {{element.dni}} </td>
+    </ng-container>
+
+    <!-- Apellido Column -->
+    <ng-container matColumnDef="apellido">
+        <th mat-header-cell *matHeaderCellDef> Apellido </th>
+        <td mat-cell *matCellDef="let element"> {{element.apellido}} </td>
+    </ng-container>
+
+    <!-- NroSocio Column -->
+    <ng-container matColumnDef="nroSocio">
+        <th mat-header-cell *matHeaderCellDef> Nro Socio </th>
+        <td mat-cell *matCellDef="let element"> #{{element.nro_socio}} </td>
+    </ng-container>
+    <!-- Nivel Column -->
+    <ng-container matColumnDef="nivel">
+        <th mat-header-cell *matHeaderCellDef> Nivel </th>
+        <td mat-cell *matCellDef="let element"> {{element.nivel_id | enumAsString:Niveles}} </td>
+    </ng-container>
+
+    <!-- Categoria Column -->
+    <ng-container matColumnDef="categoria">
+        <th mat-header-cell *matHeaderCellDef> Categoria </th>
+        <td mat-cell *matCellDef="let element"> {{element.categoria_id | enumAsString:Categorias}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="presente">
+        <th mat-header-cell *matHeaderCellDef> Asistencia </th>
+        <td mat-cell *matCellDef="let element">
+            <mat-checkbox color="primary" class="asistencia" (change)="onChange(element)"></mat-checkbox>
+        </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>
