@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { PagoService } from 'src/app/services/pago.service';
+import { Pago } from 'src/app/models/pago';
 
 @Component({
   selector: 'app-pago-listado',
@@ -7,9 +9,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PagoListadoComponent implements OnInit {
 
-  constructor() { }
+  pagos:Pago[];
+  constructor(private pagoSvc:PagoService) { }
 
   ngOnInit(): void {
+    this.pagoSvc.getAllPagos().subscribe(pagos=>{
+      this.pagos=pagos;
+    })
   }
 
 }

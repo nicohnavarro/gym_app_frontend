@@ -1,0 +1,11 @@
+.pagos-container{
+    display:inline-block;
+}
+
+.mat-card{
+    margin: 1rem;
+    background-color: #ffd740;
+    text-align: center;
+    align-items: center;
+
+}

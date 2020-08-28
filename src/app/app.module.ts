@@ -32,6 +32,7 @@ import { PorDiaComponent } from './components/control/por-dia/por-dia.component'
 import { PagoRegistroComponent } from './components/pagos/pago-registro/pago-registro.component';
 import { PagoDetalleComponent } from './components/pagos/pago-detalle/pago-detalle.component';
 import { PagoListadoComponent } from './components/pagos/pago-listado/pago-listado.component';
+import { IdAlumnoToAlumnoPipe } from './pipes/id-alumno-to-alumno.pipe';
 @NgModule({
   declarations: [
     AppComponent,
@@ -58,7 +59,8 @@ import { PagoListadoComponent } from './components/pagos/pago-listado/pago-lista
     PorDiaComponent,
     PagoRegistroComponent,
     PagoDetalleComponent,
-    PagoListadoComponent
+    PagoListadoComponent,
+    IdAlumnoToAlumnoPipe
   ],
   imports: [
     BrowserModule,
