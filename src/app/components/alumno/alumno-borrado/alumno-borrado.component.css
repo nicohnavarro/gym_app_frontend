@@ -3,7 +3,8 @@
 }
 
 .container_info{
-    display: flex;
+    display: block;
+    text-align: center;
 }
 
 .botones{

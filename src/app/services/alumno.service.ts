@@ -16,7 +16,7 @@ export class AlumnoService {
   }
 
   public getAlumnoById(id:number){
-    return this.http.get<any>(`alumno/${id}`);
+    return this.http.get<any>(`${environment.API_URL}alumno/${id}`);
   }
 
   public addAlumno(alumno:Alumno){
