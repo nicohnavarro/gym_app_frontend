@@ -1,5 +1,10 @@
 .pagos-container{
-    display:inline-block;
+    padding:auto;
+    margin:1rem 1rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    align-content: center;
 }
 
 .mat-card{
@@ -7,5 +12,8 @@
     background-color: #ffd740;
     text-align: center;
     align-items: center;
-
 }
+
+.example-card {
+    width: 15vw;
+  }
