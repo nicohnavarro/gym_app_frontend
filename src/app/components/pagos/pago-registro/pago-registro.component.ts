@@ -44,8 +44,8 @@ export class PagoRegistroComponent implements OnInit {
     let pago:Pago= new Pago();
     pago.monto=this.pago;
     pago.alumno_id=this.alumno.id;
+    pago.nivel_id=this.alumno.nivel_id;
     pago.fecha=new Date();
-    console.log(pago);
     this.pagoSvc.addPago(pago).subscribe(data=>{
       let response = data as IResponseEntity;
       this.openSnackBar(response.message, 'X');
