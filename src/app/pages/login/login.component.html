@@ -38,7 +38,7 @@
         <div class="btn-login" *ngIf="(!cargando)">
             <button class="grande" *ngIf="(!cargando)" mat-raised-button color="primary" (click)="logIn()">Ingresar</button>
             <button class="grande" *ngIf="(cargando)" mat-raised-button color="primary">Cargando ...</button>
-            <button class="grande" mat-raised-button color="accent" routerLink="/register" disabled>Registrarse</button>
+            <button class="grande" mat-raised-button color="accent" (click)="ingresoInvitado()">Ingresa como invitado</button>
         </div>
         <mat-spinner *ngIf="(cargando)"></mat-spinner>
     </div>

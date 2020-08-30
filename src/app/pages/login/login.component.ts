@@ -51,6 +51,10 @@ export class LoginComponent implements OnInit {
     catch (err) { this.openSnackBar(err.message, 'Ups!'); }
 
   }
+  ingresoInvitado(){
+    this.usuarioSvc.isLoggeado = true;
+    this.router.navigate(['/home']);
+  }
 
   openSnackBar(message: string, action: string) {
     let snackBarRef = this._snackBar.open(message, action, {
