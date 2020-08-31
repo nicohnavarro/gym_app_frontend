@@ -6,6 +6,9 @@ import { AlumnoService } from 'src/app/services/alumno.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatTableDataSource } from '@angular/material/table';
 import { Alumno } from 'src/app/models/alumno';
+import { Asistencia } from 'src/app/models/asistencia';
+import { AsistenciaService } from 'src/app/services/asistencia.service';
+import { IResponseEntity } from 'src/app/models/interfaces/responseEntity';
 
 @Component({
   selector: 'app-por-nivel-cat',
@@ -15,6 +18,7 @@ import { Alumno } from 'src/app/models/alumno';
 export class PorNivelCatComponent implements OnInit {
 
   niveles = Niveles;
+  asistencias:Asistencia[]=[];
   categorias = Categorias;
   categoriaFormControl = new FormControl();
   nivelFormControl = new FormControl();
@@ -27,7 +31,7 @@ export class PorNivelCatComponent implements OnInit {
     'presente'
   ];
   dataSource = new MatTableDataSource<Alumno>(this.alumnos);
-  constructor(private alumnoSvc: AlumnoService, private _snackBar: MatSnackBar) { }
+  constructor(private alumnoSvc: AlumnoService, private _snackBar: MatSnackBar,private asistenciaSvc:AsistenciaService) { }
 
   ngOnInit(): void {
   }
@@ -35,7 +39,25 @@ export class PorNivelCatComponent implements OnInit {
   onOptionsSelected() {
   }
 
-  onChange(element) {
+  onChange(presente:boolean,element:Alumno) {
+
+    let asistencia = new Asistencia();
+    asistencia.alumno_id=element.id;
+    asistencia.categoria_id=element.categoria_id;
+    asistencia.nivel_id =element.nivel_id;
+    asistencia.fecha=new Date();
+    if(presente){
+      this.asistencias.push(asistencia);
+      console.log(this.asistencias);
+    }
+    else{
+      let filtrado = this.asistencias.filter((asistencia)=>{
+        if(asistencia.alumno_id != element.id)
+        return true;
+      });
+      this.asistencias = filtrado;
+      console.log(this.asistencias);
+    }
   }
 
   buscarAlumnos() {
@@ -69,4 +91,13 @@ export class PorNivelCatComponent implements OnInit {
     });
   }
 
+  guardarAsistencia(){
+    console.log(this.asistencias);
+    this.asistencias.forEach(asistencia => {
+      this.asistenciaSvc.addAsistencia(asistencia).subscribe(data=>{
+        let response = data as IResponseEntity;
+          this.openSnackBar(response.message, 'X');
+        }, err => { this.openSnackBar(err, 'X'); });      
+    });
+  }
 }
