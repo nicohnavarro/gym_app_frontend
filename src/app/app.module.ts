@@ -9,7 +9,7 @@ import { ErrorComponent } from './pages/error/error.component';
 import { HomeComponent } from './pages/home/home.component';
 import { RegisterComponent } from './pages/register/register.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MaterialModule } from './modules/material/material.module';
+import { MaterialModule } from './modules/material.module';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { AlumnoListadoComponent } from './components/alumno/alumno-listado/alumno-listado.component';
 import { AlumnoDetalleComponent } from './components/alumno/alumno-detalle/alumno-detalle.component';
@@ -34,6 +34,9 @@ import { PagoDetalleComponent } from './components/pagos/pago-detalle/pago-detal
 import { PagoListadoComponent } from './components/pagos/pago-listado/pago-listado.component';
 import { IdAlumnoToAlumnoPipe } from './pipes/id-alumno-to-alumno.pipe';
 import { DateFormatPipe } from './pipes/date-format.pipe';
+import {ChartModule} from 'angular-highcharts';
+import { ReportePagosComponent } from './components/reporte/reporte-pagos/reporte-pagos.component';
+import { ReporteAsistenciasComponent } from './components/reporte/reporte-asistencias/reporte-asistencias.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -62,7 +65,9 @@ import { DateFormatPipe } from './pipes/date-format.pipe';
     PagoDetalleComponent,
     PagoListadoComponent,
     IdAlumnoToAlumnoPipe,
-    DateFormatPipe
+    DateFormatPipe,
+    ReportePagosComponent,
+    ReporteAsistenciasComponent
   ],
   imports: [
     BrowserModule,
@@ -71,7 +76,8 @@ import { DateFormatPipe } from './pipes/date-format.pipe';
     MaterialModule,
     FormsModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    ChartModule
   ],
   providers: [AlumnoHelper],
   bootstrap: [AppComponent]
