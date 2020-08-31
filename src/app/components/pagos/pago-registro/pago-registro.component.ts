@@ -5,6 +5,7 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Pago } from 'src/app/models/pago';
 import { Alumno } from 'src/app/models/alumno';
 import { IResponseEntity } from 'src/app/models/interfaces/responseEntity';
+import { AlumnoService } from 'src/app/services/alumno.service';
 
 export interface EnviarPago {
   alumno;
@@ -24,6 +25,7 @@ export class PagoRegistroComponent implements OnInit {
   constructor(public dialogRef: MatDialogRef<PagoRegistroComponent>,
     private pagoSvc: PagoService,
     private _snackBar: MatSnackBar,
+    private alumnoSvc:AlumnoService,
     @Inject(MAT_DIALOG_DATA) public data: EnviarPago) { }
 
   ngOnInit(): void {
@@ -46,10 +48,16 @@ export class PagoRegistroComponent implements OnInit {
     pago.alumno_id=this.alumno.id;
     pago.nivel_id=this.alumno.nivel_id;
     pago.fecha=new Date();
+    this.alumno.cuota=true;
     this.pagoSvc.addPago(pago).subscribe(data=>{
       let response = data as IResponseEntity;
-      this.openSnackBar(response.message, 'X');
-      this.dialogRef.close();
+      this.alumnoSvc.modifyAlumno(this.alumno).subscribe(data=>{
+        let resp = data as IResponseEntity;
+        if(resp.statusCode==200){
+          this.openSnackBar(response.message, 'X');
+          this.dialogRef.close();
+        }
+      })
     }, err => {
       this.openSnackBar(err, 'X');
     });

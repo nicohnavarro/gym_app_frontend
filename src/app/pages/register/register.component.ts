@@ -131,6 +131,7 @@ export class RegisterComponent implements OnInit {
     this.alumno.nro_socio = Math.floor(Math.random() * (9999 - 1)) + 2;
     this.alumno.edad = this.alumnoHelper.calcularEdad(this.fechaNaFormControl.value);
     this.alumno.certificado_medico = this.imagen1;
+    this.alumno.cuota=false;
     this.alumnoHelper.asignarNivel(this.alumno);
     
   }
