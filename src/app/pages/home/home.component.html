@@ -1,2 +1,66 @@
 <app-nav-bar></app-nav-bar>
-<p>home works!</p>
+<mat-carousel
+  timings="250ms ease-in"
+  [autoplay]="true"
+  interval="5000"
+  color="accent"
+  maxWidth="auto"
+  proportion="25"
+  slides="5"
+  [loop]="true"
+  [hideArrows]="false"
+  [hideIndicators]="false"
+  [useKeyboard]="true"
+  [useMouseWheel]="false"
+  orientation="ltr"
+>
+  <mat-carousel-slide
+    #matCarouselSlide
+    *ngFor="let slide of slides; let i = index"
+    [image]="slide.image"
+    overlayColor="#00000040"
+    [hideOverlay]="false"
+  ></mat-carousel-slide>
+</mat-carousel>
+<div class="carrousel">
+    
+</div>
+
+<mat-horizontal-stepper>
+    <mat-step label="Paso 1" state="phone">
+      <p>Marta Barrera ex medallista olímpica de gimnasia artística le esta pidiendo armar un sistema de registro,
+        pagos y reporte de alumnos.</p>
+      <div>
+        <button mat-button matStepperNext>Proximo</button>
+      </div>
+    </mat-step>
+    <mat-step label="Paso 2" state="chat">
+      <p>Se debe tener en cuenta que cada alumno se le asigna un nivel, el mismo puede cambiar de nivel,<br> se
+        debe pensar una pantalla donde se puede dar la modificación del mismo, como si se quiere agregar o<br>
+        modificar algún dato personal, así como actualizar el pago mensual de la actividad.</p>
+      <div>
+        <button mat-button matStepperPrevious>Atras</button>
+        <button mat-button matStepperNext>Proximo</button>
+      </div>
+    </mat-step>
+    <mat-step label="Paso 3">
+      <p>Adicionalmente le comentan que el sistema no solo sea de registración, sino poder llevar un control de<br>
+        los alumnos que van a cada clase, ya que cada uno tiene un DNI único, se debe ingresar como que vino a<br>
+        la actividad, en lo posible que valide si tiene la cuota al día.</p>
+        <button mat-button matStepperPrevious>Atras</button>
+        <button mat-button matStepperNext>Proximo</button>
+    </mat-step>
+    <mat-step label="Paso 4">
+        <p>Por último, Marta le solicita poder generar reportes mensuales con las siguientes características, reporte<br>
+            de asistencia por nivel mensual, reporte de pago por nivel de los alumnos.</p>
+            <div>
+        <button mat-button matStepperPrevious>Atras</button>
+      </div>
+      </mat-step>
+    <ng-template matStepperIcon="phone">
+      <mat-icon>call_end</mat-icon>
+    </ng-template>
+    <ng-template matStepperIcon="chat">
+      <mat-icon>forum</mat-icon>
+    </ng-template>
+  </mat-horizontal-stepper>

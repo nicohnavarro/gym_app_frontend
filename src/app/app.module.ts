@@ -37,6 +37,7 @@ import { DateFormatPipe } from './pipes/date-format.pipe';
 import {ChartModule} from 'angular-highcharts';
 import { ReportePagosComponent } from './components/reporte/reporte-pagos/reporte-pagos.component';
 import { ReporteAsistenciasComponent } from './components/reporte/reporte-asistencias/reporte-asistencias.component';
+import { MatCarouselModule } from '@ngmodule/material-carousel';
 @NgModule({
   declarations: [
     AppComponent,
@@ -77,7 +78,8 @@ import { ReporteAsistenciasComponent } from './components/reporte/reporte-asiste
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
-    ChartModule
+    ChartModule,
+    MatCarouselModule.forRoot()
   ],
   providers: [AlumnoHelper],
   bootstrap: [AppComponent]
