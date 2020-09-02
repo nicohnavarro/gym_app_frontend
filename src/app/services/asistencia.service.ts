@@ -11,10 +11,10 @@ export class AsistenciaService {
 
   constructor(private http: HttpClient) { }
 
-  public getAllAlumnos():Observable<any>{
+  public getAllAsistencias():Observable<any>{
     return this.http.get<any>(environment.API_URL+'asistencia/getAll');
   }
-  public getAlumnoById(date:Date){
+  public getAsistenciaByDate(date:Date){
     return this.http.get<any>(`${environment.API_URL}asistencia/${date}`);
   }
 
