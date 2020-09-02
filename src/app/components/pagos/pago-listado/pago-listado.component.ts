@@ -6,6 +6,7 @@ import { AlumnoDetalleComponent } from '../../alumno/alumno-detalle/alumno-detal
 import { AlumnoService } from 'src/app/services/alumno.service';
 import { IResponseEntity } from 'src/app/models/interfaces/responseEntity';
 
+
 @Component({
   selector: 'app-pago-listado',
   templateUrl: './pago-listado.component.html',
@@ -18,7 +19,12 @@ export class PagoListadoComponent implements OnInit {
 
   ngOnInit(): void {
     this.pagoSvc.getAllPagos().subscribe(pagos=>{
-      this.pagos=pagos.sort(function(a,b){
+      this.pagos=pagos.filter(pago=>{
+        let alumnoExiste:boolean = this.verificarExistenciaAlumno(pago.alumno_id);
+        if(!alumnoExiste)
+          return true;
+      })
+      .sort(function(a,b){
         return (new Date(b.fecha).getTime() - new Date(a.fecha).getTime());
       })
     })
@@ -36,6 +42,18 @@ export class PagoListadoComponent implements OnInit {
     console.log(pago);
   }
 
+  verificarExistenciaAlumno(alumno_id:number):boolean{
+    let rta:boolean;
+    this.alumnoSvc.getAlumnoById(alumno_id).subscribe(data=>{
+      let response = data as IResponseEntity;
+      if(response.statusCode == 200)
+        rta= true;
+      else
+        rta= false;
+    })
+    return rta;
+
+  }
 
 abrirDetalleAlumno(alumno_id){
   console.log(alumno_id);

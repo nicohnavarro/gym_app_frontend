@@ -35,7 +35,7 @@ de asistencia por nivel mensual, reporte de pago por nivel de los alumnos.
 
 ### Ingreso 🏥
 
-![principal](https://github.com/nicohnavarro/gym_app_frontend/blob/master/src/assets/readme/01_login.gif
+![principal](https://github.com/nicohnavarro/gym_app_frontend/blob/master/src/assets/readme/01_login.gif)
 
 
 ## Listados 📦

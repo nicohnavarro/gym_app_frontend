@@ -12,6 +12,8 @@ export class IdAlumnoToAlumnoPipe implements PipeTransform {
   transform(idAlumno: number):Promise<string> {
     return this.alumnoSvc.getAlumnoById(idAlumno).toPromise().then(resolve =>{
       return resolve.entity.apellido;
+    }).catch(err=>{
+      return "No existe el alumno...";
     })
   }
 
