@@ -37,7 +37,6 @@ export class ReporteAsistenciasComponent implements OnInit {
         let color:string =this.getRandomColor();
         return {'y':mes.cantidad,'color':color};
       });
-      console.log(asistencias);
 
       let dataNivel = this.niveles.map(nivel=>{
         let cantidadPorNivel = this.calcularAsistenciasPorNivel(nivel,asistencias);

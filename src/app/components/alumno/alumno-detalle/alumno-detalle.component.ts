@@ -98,7 +98,6 @@ export class AlumnoDetalleComponent implements OnInit {
     this.alumnoSvc.modifyAlumno(this.alumnoDetalle).subscribe(data => {
       let response = data as IResponseEntity;
       this.openSnackBar(response.message, 'X');
-      console.log(response);
     }, err => {
       this.openSnackBar(err, 'X');
 

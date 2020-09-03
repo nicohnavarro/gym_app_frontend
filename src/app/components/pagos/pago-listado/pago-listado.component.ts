@@ -39,7 +39,6 @@ export class PagoListadoComponent implements OnInit {
   }
 
   abriDetallePago(pago){
-    console.log(pago);
   }
 
   verificarExistenciaAlumno(alumno_id:number):boolean{
@@ -56,7 +55,6 @@ export class PagoListadoComponent implements OnInit {
   }
 
 abrirDetalleAlumno(alumno_id){
-  console.log(alumno_id);
   this.alumnoSvc.getAlumnoById(alumno_id).subscribe(data=>{
     let response = data as IResponseEntity;
     this.openDialog(AlumnoDetalleComponent,{

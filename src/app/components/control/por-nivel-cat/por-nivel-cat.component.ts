@@ -48,7 +48,6 @@ export class PorNivelCatComponent implements OnInit {
     asistencia.fecha=new Date();
     if(presente){
       this.asistencias.push(asistencia);
-      console.log(this.asistencias);
     }
     else{
       let filtrado = this.asistencias.filter((asistencia)=>{
@@ -56,7 +55,6 @@ export class PorNivelCatComponent implements OnInit {
         return true;
       });
       this.asistencias = filtrado;
-      console.log(this.asistencias);
     }
   }
 
@@ -92,7 +90,6 @@ export class PorNivelCatComponent implements OnInit {
   }
 
   guardarAsistencia(){
-    console.log(this.asistencias);
     this.asistencias.forEach(asistencia => {
       this.asistenciaSvc.addAsistencia(asistencia).subscribe(data=>{
         let response = data as IResponseEntity;

@@ -36,7 +36,6 @@ export class LoginComponent implements OnInit {
       this.activarSpinner();
       if (this.emailFormControl.value == "" || this.passwordFormControl.value == "")
         throw new Error("Debe ingresar correo y clave!");
-      console.log(this.emailFormControl.value);
       this.usuario = {
         correo: this.emailFormControl.value,
         clave: this.passwordFormControl.value
