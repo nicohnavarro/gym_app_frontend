@@ -32,12 +32,13 @@ export class barChart {
   ];
   opciones:Options;
 
-  constructor(data,categorias,title){
-    // this.data = data;
-    // this.categorias = categorias;
+  constructor(data,categorias,title,render){
+    this.data = data;
+    this.categorias = categorias;
     this.opciones  = {
       chart: {
         type: 'bar',
+        renderTo: render,
       },
       credits: {
         enabled: false,

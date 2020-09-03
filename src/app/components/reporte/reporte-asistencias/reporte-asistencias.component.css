@@ -1,22 +1,13 @@
-#gradient-0 stop{
-    stop-color: #506ef9;
-}
-#gradient-0 stop[offset="0"]{
-    stop-opacity: 0.25;
-}
-#gradient-0 stop[offset="1"]{
-    stop-opacity: 0.25;
+#container-asistencias{
+    display:grid;
+    padding:20px;
+    grid-template-columns: repeat(auto-fit,minmax(350px,500px));
+    grid-gap: 10px;
+    margin-top: 30px;
 }
 
-.highcharts-color-0{
-    fill:#506ef9;
-    stroke:#506ef9;
-
-}
-
-.highcharts-color-0 .highcharts-area{
-    fill-opacity: 1;
-    fill:url(#gradient-0);
-
+.pie-asistencias{
+    background-color: grey;
+    border-radius: 2.5em;
 }
 
