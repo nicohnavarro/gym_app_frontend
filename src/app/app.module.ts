@@ -38,6 +38,7 @@ import {ChartModule} from 'angular-highcharts';
 import { ReportePagosComponent } from './components/reporte/reporte-pagos/reporte-pagos.component';
 import { ReporteAsistenciasComponent } from './components/reporte/reporte-asistencias/reporte-asistencias.component';
 import { MatCarouselModule } from '@ngmodule/material-carousel';
+
 @NgModule({
   declarations: [
     AppComponent,
