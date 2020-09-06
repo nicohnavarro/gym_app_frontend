@@ -34,11 +34,13 @@ export class ReportePagosComponent implements OnInit {
       this.categorias = this.niveles.map(aux => Niveles[aux]);
       let dataPago = this.pagosXNivel.map(nivel => {
         // let color: string = this.setColorBars(nivel.pagos.cantidad_pagos)
-        let color :string = this.setColorDonut(nivel.nivel);
+        // let color :string = this.setColorDonut(nivel.nivel);
+        let color :string = this.getRandomColor()
         return { 'y': nivel.pagos.cantidad_pagos, 'color': color }
       });
       let dataNivel = this.pagosXNivel.map(nivel => {
-        let color = this.setColorDonut(nivel.nivel)
+        // let color = this.setColorDonut(nivel.nivel)
+        let color :string = this.getRandomColor()
         return {'name':nivel.nivel,'y':nivel.pagos.total,'color':color}
       })
       let totalFinal= dataNivel.map(data =>{
@@ -61,6 +63,16 @@ export class ReportePagosComponent implements OnInit {
       return '#00adb5'
     else
       return '#506ef9'
+  }
+
+  
+  getRandomColor() {
+    let letters = '0123456789ABCDEF';
+    let color = '#';
+    for (var i = 0; i < 6; i++) {
+      color += letters[Math.floor(Math.random() * 16)];
+    }
+    return color;
   }
 
   setColorDonut(nivel: string) {
